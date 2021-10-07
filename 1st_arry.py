@@ -185,25 +185,37 @@
 #         print("NO")
 
 import sys
-def change(heap):
+
+def chg(heap):
+    heap.insert(0, heap.pop())
+
     two_to = len([i for i in range(len(heap)) if 2**i <= len(heap)])
     origin, chg_save = 0, 0
+
     for _ in range(two_to-1):
-        if heap[origin*2+1] > heap[origin]:
-            heap.insert(origin, heap.pop(origin*2+1))
-            chg_save = heap.pop(origin+1)
-            heap.insert(origin*2+1, chg_save)
+        print(f'origin값 : {origin}\nheap값 : {heap}\ntwo_to값 : {two_to-1}\n')
+        if len(heap) >= origin*2+2  :
+            if heap[origin*2+1] > heap[origin*2+2] and (heap[origin] < heap[origin*2+1]):
+                heap.insert(origin, heap.pop(origin*2+1))
+                chg_save = heap.pop(origin+1)
+                heap.insert(origin*2+1, chg_save)
 
-            origin = origin*2+1
-        elif heap[origin*2+2] > heap[origin]:
-            heap.insert(origin, heap.pop(origin*2+2))
-            chg_save = heap.pop(origin+2)
-            heap.insert(origin*2+2, chg_save)
+                origin = origin*2+1
+            elif heap[origin*2+1] < heap[origin*2+2] and (heap[origin] < heap[origin*2+2]):
+                heap.insert(origin, heap.pop(origin*2+2))
+                chg_save = heap.pop(origin+1)
+                heap.insert(origin*2+2, chg_save)
 
-            origin = origin*2+2
-        else:
-            break
+                origin = origin*2+2
+            else:
+                break
     return heap
+
+
+
+
+
+
 
 N = int(input())
 heap, save = [], 0
@@ -216,7 +228,8 @@ for _ in range(N):
         print(heap.pop(0))
         if len(heap) >= 2:
             print(heap)
-            heap = change(heap)
+            heap = chg(heap)
+            print(f'함수를 빠져나온 heap값 : {heap}')
     else:
         heap.append(num)
         if len(heap) > 1:

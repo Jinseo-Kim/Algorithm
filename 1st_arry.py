@@ -185,30 +185,34 @@
 #         print("NO")
 
 import sys
+import time
 
+def plus_num(heap):
+    index = len(heap-1)
+
+    if heap[index] > heap[(index-1)//2]: #아들 인덱스가 더 높다면 부모 인덱스와 자리를 바꿈
+        heap[(index-1)//2], heap[index] = heap[index], heap[(index-1)//2]
 def chg(heap):
+    start = time.time()
+    origin = 0
     heap.insert(0, heap.pop())
 
-    two_to = len([i for i in range(len(heap)) if 2**i <= len(heap)])
-    origin, chg_save = 0, 0
+    two_to = len([i for i in range(len(heap)) if 2**i < len(heap)])
 
-    for _ in range(two_to-1):
-        print(f'origin값 : {origin}\nheap값 : {heap}\ntwo_to값 : {two_to-1}\n')
-        if len(heap) >= origin*2+2  :
-            if heap[origin*2+1] > heap[origin*2+2] and (heap[origin] < heap[origin*2+1]):
-                heap.insert(origin, heap.pop(origin*2+1))
-                chg_save = heap.pop(origin+1)
-                heap.insert(origin*2+1, chg_save)
-
+    for _ in range(two_to):
+        if len(heap) > origin*2+2:
+            if heap[origin*2+1] >= heap[origin*2+2]:
+                heap[origin], heap[origin*2+1] = heap[origin*2+1], heap[origin]
                 origin = origin*2+1
-            elif heap[origin*2+1] < heap[origin*2+2] and (heap[origin] < heap[origin*2+2]):
-                heap.insert(origin, heap.pop(origin*2+2))
-                chg_save = heap.pop(origin+1)
-                heap.insert(origin*2+2, chg_save)
 
+            elif heap[origin*2+1] <= heap[origin*2+2]:
+                heap[origin], heap[origin*2+2] = heap[origin*2+2], heap[origin]
                 origin = origin*2+2
+
             else:
                 break
+    end = time.time()
+    print(f'{end-start:.5f}sec')
     return heap
 
 
@@ -218,37 +222,18 @@ def chg(heap):
 
 
 N = int(input())
-heap, save = [], 0
+heap = []
 
 for _ in range(N):
     num = int(sys.stdin.readline())
     if num == 0 and len(heap) == 0:
         print(0)
     elif num == 0 and len(heap) >= 1:
-        print(heap.pop(0))
         if len(heap) >= 2:
-            print(heap)
             heap = chg(heap)
-            print(f'함수를 빠져나온 heap값 : {heap}')
+        print(heap.pop(0))
+
     else:
         heap.append(num)
-        if len(heap) > 1:
-            index, change = len(heap)-1, len(heap)-1
-            two_to = len([i for i in range(len(heap)) if 2**i <= len(heap)])
-            for _ in range(two_to-1):
-                if index%2 == 1:
-                    index = (index-1)//2
-                elif index%2 == 0:
-                    index = (index-2)//2
-                else:
-                    index = 0
 
-                if heap[index] < heap[change]:
-                    save = heap.pop(change)
-                    heap.insert(index,save)
-                    heap.insert(change,heap.pop(index+1))
-
-                    change = index
-                else:
-                    break
-            print(heap)
+    print(heap)

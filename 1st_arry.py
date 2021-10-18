@@ -185,15 +185,19 @@
 #         print("NO")
 
 import sys
-import time
 
 def plus_num(heap):
-    index = len(heap-1)
+    index = len(heap)-1
+    for _ in range(len(heap)):
+        print(f'자식 인덱스 : {heap[index]}, 부모 인덱스 : {heap[(index-1)//2]}')
+        if index < 1:
+            break
+        elif heap[index] > heap[(index-1)//2]: #아들 인덱스가 더 높다면 부모 인덱스와 자리를 바꿈
+            heap[index], heap[(index-1)//2] = heap[(index-1)//2], heap[index]
+            index = (index-1)//2
+    return heap
 
-    if heap[index] > heap[(index-1)//2]: #아들 인덱스가 더 높다면 부모 인덱스와 자리를 바꿈
-        heap[(index-1)//2], heap[index] = heap[index], heap[(index-1)//2]
 def chg(heap):
-    start = time.time()
     origin = 0
     heap.insert(0, heap.pop())
 
@@ -211,8 +215,6 @@ def chg(heap):
 
             else:
                 break
-    end = time.time()
-    print(f'{end-start:.5f}sec')
     return heap
 
 
@@ -235,5 +237,6 @@ for _ in range(N):
 
     else:
         heap.append(num)
+        plus_num(heap)
 
     print(heap)

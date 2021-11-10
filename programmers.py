@@ -90,23 +90,28 @@
 # nums = [1,2,7,6,4]
 # solution(nums)
 
+# from itertools import combinations
+
 class stack():
-    def push():
+    def __init__(self):
+        self.stack_list = []
+
+    def push(self,num):
+        self.stack_list.append(nums)
+
+    def pop(self):
         pass
 
-    def pop():
+    def size(self):
         pass
 
-    def size():
+    def empty(self):
         pass
 
-    def empty():
-        pass
-
-    def top():
+    def top(self):
         pass
 
 
 for _ in range(int(input())):
     command = list(map(str, input().split()))
-    print(command)
+    

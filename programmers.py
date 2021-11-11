@@ -97,7 +97,7 @@ class stack():
         self.stack_list = []
 
     def push(self,num):
-        self.stack_list.append(nums)
+        self.stack_list.append(num)
 
     def pop(self):
         pass

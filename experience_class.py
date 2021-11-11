@@ -4,13 +4,13 @@ class Time:
         self.minute = minute
         self.second = second
 
-    def is_time_valid(self):
-        self.hour, self.minute, self.second = map(int,time_string.split(':'))
-        return self.hour <= 24 and self.minute <= 59 and self.second <= 60
+    def is_time_valid(time_string):
+        hour, minute, second = map(int,time_string.split(':'))
+        return hour <= 24 and minute <= 59 and second <= 60
  
-    def from_string(self):
-        return self.hour, self.minute, self.second
-
+    def from_string(time_string):
+        hour, minute, second = map(int, time_string.split(':'))
+        return Time(hour, minute, second)
 
 time_string = input()
  

@@ -92,26 +92,51 @@
 
 # from itertools import combinations
 
-class stack():
-    def __init__(self):
-        self.stack_list = []
+# class stack():
+#     def __init__(self):
+#         self.stack_list = []
 
-    def push(self,num):
-        self.stack_list.append(num)
+#     def push(self,num):
+#         self.stack_list.append(num)
 
-    def pop(self):
-        pass
+#     def pop(self):
+#         pass
 
-    def size(self):
-        pass
+#     def size(self):
+#         pass
 
-    def empty(self):
-        pass
+#     def empty(self):
+#         pass
 
-    def top(self):
-        pass
+#     def top(self):
+#         pass
 
 
-for _ in range(int(input())):
-    command = list(map(str, input().split()))
+# for _ in range(int(input())):
+#     command = list(map(str, input().split()))
     
+
+# 순열 for문으로 구축해보기 (Combinations편)
+
+# start_num = 5
+# result = []
+
+# for i in range(1,start_num+1):
+#     for j in range(i+1, start_num):
+#         result.append((i,j))
+
+# print(result)
+
+# 순열 for문으로 구축해보기 (Permutations편)
+
+# a = ['A','B','C']
+# result = []
+
+# for i in range(len(a)):
+#     for j in range(len(a)):
+#         if i == j:
+#             pass
+#         else:
+#             result.append((a[i],a[j]))
+
+# print(result)

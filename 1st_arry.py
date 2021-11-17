@@ -185,54 +185,60 @@
 #         print("NO")
 
 # import sys
-#
+# import math
+
 # def plus_num(heap):
 #     index = len(heap)-1
-#     for _ in range(len(heap)):
-#         if heap[index] > heap[(index-1)//2] and index > 0 :
-#             heap[index], heap[(index-1)//2] = heap[(index-1)//2], heap[index]
-#             index = (index-1)//2
+#     while  index > 0 and heap[index] > heap[(index-1)//2]:
+#         heap[index], heap[(index-1)//2] = heap[(index-1)//2], heap[index]
+#         index = (index-1)//2
 #     return heap
-#
+
 # def chg(heap):
-#     origin = 0
-#     heap.insert(0, heap.pop())
-#
-#     two_to = len([i for i in range(len(heap)) if 2**i < len(heap)])
-#
-#     if len(heap) > 2:
-#         for _ in range(two_to):
-#             if len(heap) > origin*2+2:
-#                 if heap[origin*2+1] >= heap[origin*2+2] and heap[origin] <= heap[origin*2+1]:
-#                     heap[origin], heap[origin*2+1] = heap[origin*2+1], heap[origin]
-#                     origin = origin*2+1
-#
-#                 elif heap[origin*2+1] < heap[origin*2+2] and heap[origin] <= heap[origin*2+2]:
-#                     heap[origin], heap[origin*2+2] = heap[origin*2+2], heap[origin]
-#                     origin = origin*2+2
-#
-#                 else:
-#                     break
-#     elif heap[1] > heap[0]:
-#         heap[1], heap[0] = heap[0], heap[1]
-#
+#     heap_len = len(heap)
+#     if heap_len > 1:
+#         origin = 0
+#         heap[0] = heap.pop()
+#         heap_len-=1
+#         while True:
+#             right = origin*2+2
+#             left = origin*2+1
+#             if heap_len <= left:
+#                 break
+
+#             next_ = origin
+#             if heap[left] > heap[origin]:
+#                 next_ = left
+            
+#             if heap_len > right:
+#                 if heap[next_] < heap[right]:
+#                     next_ = right
+#             if next_ == origin:
+#                 break
+
+#             heap[next_], heap[origin] = heap[origin], heap[next_]
+#             origin = next_
+
+#     else:
+#         heap.pop()
+
 #     return heap
-#
-#
-#
-#
+
+
+
+
 # N = int(input())
 # heap = []
-#
+
 # for _ in range(N):
 #     num = int(sys.stdin.readline())
-#     if num == 0 and len(heap) == 0:
-#         print(0)
-#     elif num == 0 and len(heap) >= 1:
-#         print(heap.pop(0))
-#         if len(heap) >= 2:
+#     if num == 0:
+#         if len(heap) > 0:
+#             print(heap[0])
 #             heap = chg(heap)
-#
+#         else:
+#             print(0)
+
 #     else:
 #         heap.append(num)
 #         plus_num(heap)
@@ -242,18 +248,18 @@
 
 # 상근이는 카드 n(4 ≤ n ≤ 10)장을 바닥에 나란히 놓고 놀고있다. 각 카드에는 1이상 99이하의 정수가 적혀져 있다.
 # 상근이는 이 카드 중에서 k(2 ≤ k ≤ 4)장을 선택하고, 가로로 나란히 정수를 만들기로 했다. 상근이가 만들 수 있는 정수는 모두 몇 가지일까?
-n = int(input())
-k = int(input())
+# n = int(input())
+# k = int(input())
 
-if 4 <= n <= 10 and 2 <= k <= 4:
-    card_pack = list(map(lambda x:str(x) if x<=99 else 0,[int(input()) for _ in range(n)]))
-if 0 not in card_pack:
-    new_list = []
-    for i in range(n):
-        for j in range(n*(k-1)):
-            if i == j:
-                continue
-            else:
-                new_list.append(card_pack[i]+card_pack[j])
-print(f'list개수 : {len(new_list)}\n리스트 인자 : {new_list}')
-print(len(set(new_list)))
+# if 4 <= n <= 10 and 2 <= k <= 4:
+#     card_pack = list(map(lambda x:str(x) if x<=99 else 0,[int(input()) for _ in range(n)]))
+# if 0 not in card_pack:
+#     new_list = []
+#     for i in range(n):
+#         for j in range(n*(k-1)):
+#             if i == j:
+#                 continue
+#             else:
+#                 new_list.append(card_pack[i]+card_pack[j])
+# print(f'list개수 : {len(new_list)}\n리스트 인자 : {new_list}')
+# print(len(set(new_list)))

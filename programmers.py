@@ -140,3 +140,60 @@
 #             result.append((a[i],a[j]))
 
 # print(result)
+
+
+# Singled linked list (단일 연결 리스트)
+class Node:
+    def __init__(self, data, next = None) -> None:
+        self.data = data
+        self.next = next
+    
+def init():    
+    global node1
+    # 데이터 부분
+    node1 = Node(1)
+    node2 = Node(2)
+    node3 = Node(3)
+    node4 = Node(4)
+
+    # 포인터 부분
+    node1.next = node2
+    node2.next = node3
+    node3.next = node4
+
+def insert(data):
+    global node1
+    new_node = Node(data)
+    new_node.next = node1
+    node1 = new_node
+
+def delete(delete_data):
+    global node1
+    prev_node = node1
+    next_node = node1.next
+    if delete_data == prev_node.data:
+        del prev_node
+    
+    while next_node:
+        if delete_data == next_node.data:
+            prev_node.next = next_node.next
+            del next_node
+            break
+
+        prev_node = next_node
+        next_node = next_node.next
+
+def print_list():
+    global node1
+    prev_node = node1
+    while True:
+        print(prev_node.data)
+        if prev_node.next is None:
+            break
+        prev_node = prev_node.next
+
+init()
+insert(9)
+delete(3)
+print_list()
+

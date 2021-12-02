@@ -142,6 +142,7 @@
 # print(result)
 
 
+<<<<<<< Updated upstream
 # Singled linked list (단일 연결 리스트)
 class Node:
     def __init__(self, data, next = None) -> None:
@@ -197,3 +198,11 @@ insert(9)
 delete(3)
 print_list()
 
+=======
+import sys
+import os
+import openpyxl
+from openpyxl.drawing.image import Image
+
+'/Users/jskim2/Downloads/Coverage/coverage/12/pos1/total_coverage.png'.info['dpi']
+>>>>>>> Stashed changes

@@ -142,67 +142,178 @@
 # print(result)
 
 
-<<<<<<< Updated upstream
-# Singled linked list (단일 연결 리스트)
-class Node:
-    def __init__(self, data, next = None) -> None:
-        self.data = data
-        self.next = next
+# <<<<<<< Updated upstream
+# <<<<<<< Updated upstream
+# # Singled linked list (단일 연결 리스트)
+# class Node:
+#     def __init__(self, data, next = None) -> None:
+#         self.data = data
+#         self.next = next
     
-def init():    
-    global node1
-    # 데이터 부분
-    node1 = Node(1)
-    node2 = Node(2)
-    node3 = Node(3)
-    node4 = Node(4)
+# def init():    
+#     global node1
+#     # 데이터 부분
+#     node1 = Node(1)
+#     node2 = Node(2)
+#     node3 = Node(3)
+#     node4 = Node(4)
 
-    # 포인터 부분
-    node1.next = node2
-    node2.next = node3
-    node3.next = node4
+#     # 포인터 부분
+#     node1.next = node2
+#     node2.next = node3
+#     node3.next = node4
 
-def insert(data):
-    global node1
-    new_node = Node(data)
-    new_node.next = node1
-    node1 = new_node
+# def insert(data):
+#     global node1
+#     new_node = Node(data)
+#     new_node.next = node1
+#     node1 = new_node
 
-def delete(delete_data):
-    global node1
-    prev_node = node1
-    next_node = node1.next
-    if delete_data == prev_node.data:
-        del prev_node
+# def delete(delete_data):
+#     global node1
+#     prev_node = node1
+#     next_node = node1.next
+#     if delete_data == prev_node.data:
+#         del prev_node
     
-    while next_node:
-        if delete_data == next_node.data:
-            prev_node.next = next_node.next
-            del next_node
-            break
+#     while next_node:
+#         if delete_data == next_node.data:
+#             prev_node.next = next_node.next
+#             del next_node
+#             break
 
-        prev_node = next_node
-        next_node = next_node.next
+#         prev_node = next_node
+#         next_node = next_node.next
 
-def print_list():
-    global node1
-    prev_node = node1
-    while True:
-        print(prev_node.data)
-        if prev_node.next is None:
-            break
-        prev_node = prev_node.next
+# def print_list():
+#     global node1
+#     prev_node = node1
+#     while True:
+#         print(prev_node.data)
+#         if prev_node.next is None:
+#             break
+#         prev_node = prev_node.next
 
-init()
-insert(9)
-delete(3)
-print_list()
+# init()
+# insert(9)
+# delete(3)
+# print_list()
 
-=======
-import sys
-import os
-import openpyxl
-from openpyxl.drawing.image import Image
+# import sys
+# import os
+# import openpyxl
+# from openpyxl.drawing.image import Image
 
-'/Users/jskim2/Downloads/Coverage/coverage/12/pos1/total_coverage.png'.info['dpi']
->>>>>>> Stashed changes
+# '/Users/jskim2/Downloads/Coverage/coverage/12/pos1/total_coverage.png'.info['dpi']
+
+# import sys
+
+# cnt = 0
+# stack = []
+# N = int(input())
+# post = list(input())
+
+# for i in range(len(post)):
+#     if post[i] == '+':
+#         stack.append(stack.pop()+stack.pop())
+#     if post[i] == '-':
+#         stack.append(stack.pop()-stack.pop())
+#     if post[i] == '*':
+#         stack.append(stack.pop()*stack.pop())
+#     if post[i] == '/':
+#         stack.append(stack.pop()/stack.pop())
+#     elif N > cnt:
+#         cnt += 1
+#         stack_num = int(sys.stdin.readline())
+#     stack.append(stack_num)
+
+import datetime
+import requests
+from bs4 import BeautifulSoup
+import telegram
+from apscheduler.schedulers.blocking import BlockingScheduler
+
+
+def check_2d():
+    # CGV 메인 도메인 + 예매시간표 페이지 iframe 내 자원주소(src)
+    url = "http://www.cgv.co.kr/common/showtimes/iframeTheater.aspx?areacode=202&theatercode=0325&date=20211214"
+
+    response = requests.get(url)
+    bs = BeautifulSoup(response.text, 'html.parser')
+
+    chatbot = telegram.Bot(token='5048329112:AAF4lvw_NfPr1zV74eD6ZtYD9yd6gHXYAMw')
+
+
+    result = []
+
+    # 이상한 값이 끼어들어와서 이후에 replace로 날려줄 값
+    nullvalue = '[<strong>\r\n                                                '
+    nullvalue2 = '</strong>]'
+
+    # 상영목록이 담긴 리스트를 받아옴
+    two_d = bs.find_all('div', attrs={"class": "col-times"})
+
+    if (two_d):
+        for i in two_d:
+            # 4dx 클래스값을 가진 항목이 있는지 검사
+            if (i.find(class_='info-movie')):
+                # 해당 항목의 a > strong(타이틀부분) 가져옴
+                title = i.select('a > strong')
+                result.append(str(title))
+
+        result = [word.replace(nullvalue, '') for word in result]
+        result = [word.replace(nullvalue2, '') for word in result]
+        for i,j in enumerate(result):
+            if j.find('듄') == -1:
+                result[i] = 0
+            else:
+                chatbot.sendMessage(chat_id=5064622110,
+                                    text=j + " 의 예매가 오픈되었습니다.")
+                # sc.pause()        
+
+    else:
+        chatbot.sendMessage(chat_id=5064622110, text="아직 오픈된 예매가 없습니다.")
+
+
+# 스케쥴 구성을 위한 수행부
+sc = BlockingScheduler()
+sc.add_job(check_2d, 'interval', seconds=60)
+sc.start()
+
+
+
+
+
+
+
+
+
+
+
+
+        
+# def ex4():
+#     result = []
+#     bs = BeautifulSoup(response.text, 'html.parser')
+#     # CSS 처럼 셀렉터를 지정할 수 있다.
+#     # tag = bs.find('div', attrs={'class': 'info-movie'})
+#     tag = bs.find_all('div', attrs={"class": "col-times"})
+#     if (tag):
+#         for i in tag:
+#             # 4dx 클래스값을 가진 항목이 있는지 검사
+#             if (i.find(class_='info-movie')):
+#                 # 해당 항목의 a > strong(타이틀부분) 가져옴
+#                 title = i.select('a > strong')
+#                 result.append(str(title))
+#                 print(result)
+#     # <a href="/movie/bi/mi/basic.nhn?code=161242" title="범죄도시">범죄도시</a>
+
+
+# url = "http://www.cgv.co.kr/common/showtimes/iframeTheater.aspx?areacode=202&theatercode=0325&date="
+# today = datetime.date.today().strftime("%Y%m%d")
+# url += today
+
+# response = requests.get(url)
+# # print(response.text)
+# ex4()
+

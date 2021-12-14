@@ -233,6 +233,7 @@
 #     elif N > cnt:
 #         cnt += 1
 #         stack_num = int(sys.stdin.readline())
+<<<<<<< HEAD
 #         stack.append(stack_num)
 #     else:
 #         stack.append(stack_num)
@@ -266,12 +267,21 @@ class Node: # 노드의 생성문
     def __init__(self,data,next = None):
         self.data = data #3
         self.next = next #None
+=======
+#     stack.append(stack_num)
+
+class Node: # 노드의 생성문 
+    def __init__(self,data,next = None):
+        self.data = data
+        self.next = next
+>>>>>>> 2dd5682343c76fb23442875716cd46c2f98a6fe4
 
 class main: # 메인 메서드 동작 및 Head / Tail 생성문
     def __init__(self) -> None:
         self.head = None
         self.tail = None
 
+<<<<<<< HEAD
     def end_insert(self,data): # O(1)
         new_node = Node(data)
 
@@ -389,3 +399,24 @@ if __name__ == '__main__':
 #     double.insert(4)
     
 #     print_node()
+=======
+    def first_insert(self,data):
+        new_node = Node(data)
+        if self.head is None:
+            pass
+        else:
+            pass
+
+    def select_insert(self,data, Node):
+        pass
+
+    def remove(self,data):
+        pass
+
+    def print_node():
+        pass
+
+
+if __name__ == '__main__':
+    test = main()
+>>>>>>> 2dd5682343c76fb23442875716cd46c2f98a6fe4

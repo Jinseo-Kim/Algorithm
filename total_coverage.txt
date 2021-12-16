@@ -1,0 +1,2 @@
+Run, 1 Pass, 2 Passes, 3 Passes, 4 Passes, 5 Passes, 6 Passes, 7 Passes, 8 Passes, 9 Passes, 10 Passes+
+1, 15.610143, 27.307844, 22.620535, 14.256979, 7.656497, 3.565007, 1.591643, 0.817536, 0.453340, 0.575247

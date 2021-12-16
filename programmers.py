@@ -141,9 +141,6 @@
 
 # print(result)
 
-
-# <<<<<<< Updated upstream
-# <<<<<<< Updated upstream
 # # Singled linked list (단일 연결 리스트)
 # class Node:
 #     def __init__(self, data, next = None) -> None:
@@ -215,14 +212,176 @@
 
 # for i in range(len(post)):
 #     if post[i] == '+':
-#         stack.append(stack.pop()+stack.pop())
-#     if post[i] == '-':
-#         stack.append(stack.pop()-stack.pop())
-#     if post[i] == '*':
-#         stack.append(stack.pop()*stack.pop())
-#     if post[i] == '/':
-#         stack.append(stack.pop()/stack.pop())
+#         n2 = stack.pop()
+#         n1 = stack.pop()
+#         stack.append(n1+n2)
+#     elif post[i] == '-':
+#         n2 = stack.pop()
+#         n1 = stack.pop()
+#         stack.append(n1-n2)
+#     elif post[i] == '*':
+#         n2 = stack.pop()
+#         n1 = stack.pop()
+#         stack.append(n1*n2)
+#     elif post[i] == '/':
+#         n2 = stack.pop()
+#         n1 = stack.pop()
+#         stack.append(n1/n2)
 #     elif N > cnt:
 #         cnt += 1
 #         stack_num = int(sys.stdin.readline())
 #     stack.append(stack_num)
+# print(stack)
+
+#N = int(input())
+#for i in range(1,N):
+#    print((' '*(N-i))+'*'*(2*i-1)+(' '*(N-i)), end = '')
+#for i in range(N):
+#    print((' '*i+('*'*(2*N-2*i-1))+' '*i).rstrip())
+#
+#number = int(input())
+#
+#for i in range(1, number):
+#    print(' ' * (number - i), end='')
+#    print('*' * (2 * i - 1))
+#for i in range(number, 0, -1):
+#    print(' ' * (number - i), end='')
+#    print('*' * (2 * i - 1))
+
+
+#N = int(input())
+#for i in range(N-1):
+#    print(' '*i+'*'*(2*N-2*i-1))
+#for i in range(N):
+#    print(' '*(N-i-1)+'*'*(2*i+1))
+
+
+# 단일 연결 리스트 (끝에 삽입, 선택한 노드 뒤 삽입, 선택한 노드 삭제 구현)
+class Node: # 노드의 생성문 
+    def __init__(self,data,next = None):
+        self.data = data #3
+        self.next = next #None
+
+class main: # 메인 메서드 동작 및 Head / Tail 생성문
+    def __init__(self) -> None:
+        self.head = None
+        self.tail = None
+
+    def end_insert(self,data): # O(1)
+        new_node = Node(data)
+
+        if self.head is None:  # 값이 비어있다면 실행
+            self.head = new_node # self.head = 2 None memory 번지의 값 : 12345
+            self.tail = new_node # self.tail = 3 None memory 번지의 값 : 12345
+        else:                  
+            self.tail.next = new_node
+            self.tail = new_node
+
+    def select_insert(self, data, pick_node): # O(n)
+        new_node = Node(data)
+        search = self.head
+
+        while self.head is not None:
+            if search.data == pick_node:
+                new_node.next = search.next
+                search.next = new_node
+                break
+            else:
+                search = search.next
+
+
+    def select_remove(self, pick_node): # O(n)
+        prev_node = self.head
+        current_node = self.head.next # 2->3, 3->4, 4->None
+
+        while self.head is not None:
+            if self.head.data == pick_node:
+                self.head = None
+                self.head = self.head.next
+                break
+            if current_node.data == pick_node:
+                prev_node.next = current_node.next
+                break
+            else:
+                prev_node = current_node
+                current_node = current_node.next
+
+def print_node():
+    iterator = linked_list.head
+    while iterator:
+        print(f'{iterator.data}, {iterator.next}')
+        iterator = iterator.next
+
+
+if __name__ == '__main__':
+    linked_list = main()
+    linked_list.end_insert(2)
+    linked_list.end_insert(3)
+    linked_list.end_insert(4)
+    print_node()
+
+
+
+
+# # 이중 연결 리스트
+# class Node:
+#     def __init__(self, data, next = None, prev = None) -> None:
+#         self.prev = prev
+#         self.data = data
+#         self.next = next
+
+# class main:
+#     def __init__(self) -> None:
+#         self.head = None
+#         self.tail = None
+    
+#     def insert(self,data):
+#         new_node = Node(data)
+
+#         if self.head is None:
+#             self.head = new_node
+#             self.tail = new_node
+#         else:
+#             new_node.prev = self.tail
+#             self.tail.next = new_node
+#             self.tail = new_node
+    
+#     def select_remove(self, pick_node):
+#         check_node = self.head
+
+#         while check_node:
+#             if self.head.data == pick_node:
+#                 self.head = self.head.next
+#                 self.head.prev = None
+#                 break
+            
+#             if check_node.data == pick_node: 
+#                 if check_node.next is None: # tail.next = None 값이 2개거나 tail일 때
+#                     check_node.prev.next = None
+#                     self.tail = check_node.prev
+#                     break
+#                 else:
+#                     check_node.prev.next = check_node.next
+#                     check_node.next.prev = check_node.prev
+#                     check_node.prev = None
+#                     check_node.next = None
+#                     break
+#             else:
+#                 check_node = check_node.next
+
+
+# def print_node():
+#     iterator = double.head
+#     while iterator:
+#         print(f'iterator prev : {iterator.prev}    iterator data : {iterator.data}    iterator next : {iterator.next}')
+#         iterator = iterator.next
+
+
+# if __name__ == '__main__':
+#     double = main()
+#     double.insert(2)
+#     double.insert(3)
+#     double.insert(4)
+    
+#     print_node()
+

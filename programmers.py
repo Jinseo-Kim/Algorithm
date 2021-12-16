@@ -226,33 +226,3 @@
 #         cnt += 1
 #         stack_num = int(sys.stdin.readline())
 #     stack.append(stack_num)
-
-class Node: # 노드의 생성문 
-    def __init__(self,data,next = None):
-        self.data = data
-        self.next = next
-
-class main: # 메인 메서드 동작 및 Head / Tail 생성문
-    def __init__(self) -> None:
-        self.head = None
-        self.tail = None
-
-    def first_insert(self,data):
-        new_node = Node(data)
-        if self.head is None:
-            pass
-        else:
-            pass
-
-    def select_insert(self,data, Node):
-        pass
-
-    def remove(self,data):
-        pass
-
-    def print_node():
-        pass
-
-
-if __name__ == '__main__':
-    test = main()

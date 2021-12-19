@@ -7,7 +7,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 def check_2d():
     # CGV 메인 도메인 + 예매시간표 페이지 iframe 내 자원주소(src)
-    url = "http://www.cgv.co.kr/common/showtimes/iframeTheater.aspx?areacode=202&theatercode=0325&date=20211214"
+    url = "http://www.cgv.co.kr/common/showtimes/iframeTheater.aspx?areacode=202&theatercode=0325&date=20211215"
 
     response = requests.get(url)
     bs = BeautifulSoup(response.text, 'html.parser')
@@ -37,7 +37,7 @@ def check_2d():
         result = [word.replace(nullvalue2, '') for word in result]
         
         for i,j in enumerate(result):
-            if j.find('듄') == -1:
+            if j.find('스파이더') == -1:
                 result[i] = 0
             else:
                 chatbot.sendMessage(chat_id=5064622110,text=j + " 의 예매가 오픈되었습니다.")
@@ -45,8 +45,8 @@ def check_2d():
                 # sc.pause()
 
     else:
-        chatbot.sendMessage(chat_id=5064622110, text="아직 오픈된 예매가 없습니다.")
-        chatbot_2.sendMessage(chat_id=5009781554, text="아직 오픈된 예매가 없습니다.")
+        chatbot.sendMessage(chat_id=5064622110, text="서버가 터졌슴미당ㅎㅎ")
+        chatbot_2.sendMessage(chat_id=5009781554, text="서버가 터졌슴미당ㅎㅎ")
 
 
 # 스케쥴 구성을 위한 수행부

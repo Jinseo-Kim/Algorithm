@@ -141,9 +141,6 @@
 
 # print(result)
 
-
-# <<<<<<< Updated upstream
-# <<<<<<< Updated upstream
 # # Singled linked list (단일 연결 리스트)
 # class Node:
 #     def __init__(self, data, next = None) -> None:
@@ -235,8 +232,8 @@
 #         stack_num = int(sys.stdin.readline())
 #     else:
 #         stack.append(stack_num)
-
 # print(stack)
+
 #N = int(input())
 #for i in range(1,N):
 #    print((' '*(N-i))+'*'*(2*i-1)+(' '*(N-i)), end = '')
@@ -327,7 +324,7 @@
 
 
 
-# # 이중 연결 리스트
+# 이중 연결 리스트
 # class Node:
 #     def __init__(self, data, next = None, prev = None) -> None:
 #         self.prev = prev
@@ -349,7 +346,27 @@
 #             new_node.prev = self.tail
 #             self.tail.next = new_node
 #             self.tail = new_node
-    
+
+#     def select_insert(self, data, search_data):
+#         new_node = Node(data)
+#         check_node = self.head
+        
+#         while self.head.data is not None:
+#             if search_data == self.tail.data:
+#                 new_node.prev = self.tail.prev
+#                 self.tail.prev = None
+#                 self.tail = new_node
+#                 break
+#             if check_node.data == search_data:
+#                 new_node.prev = check_node
+#                 new_node.next = check_node.next
+
+#                 check_node.next = new_node
+#                 check_node.next.prev = new_node
+#                 break
+#             else:
+#                 check_node = check_node.next
+
 #     def select_remove(self, pick_node):
 #         check_node = self.head
 
@@ -388,6 +405,7 @@
 #     double.insert(4)
     
 #     print_node()
+
 
 # # 환형 연결 리스트 (끝에 삽입, 선택한 노드 뒤 삽입, 선택한 노드 삭제 구현)
 # class Node: # 노드의 생성문 

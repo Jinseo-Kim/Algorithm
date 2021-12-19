@@ -484,3 +484,29 @@
     
 #     print_node()
 ##################################### 싱글 링크드 링스트 고쳐라!!!!!!!!! #####################################
+
+
+# 해시 테이블 구현
+# 해시 테이블은 키(key)-값(value) 형태로 저장되는 자료구조이다. 키를 해시함수에 넣고 나오는 인덱스를 슬롯 인덱스로 지정해 값을 저장한다.
+# 구현 목록 : 해시 함수
+
+
+class Hash:
+    def __init__(self, length) -> None:
+        self.size = length
+        self.hastable = [i for i in range(length)]
+        
+    def save(self):
+        pass
+    
+    def getKey(self,key):
+        self.key = ord(key[0])
+        return self.key
+
+
+
+
+
+if __name__ == '__main__':
+    ht = Hash(10)
+    ht.save('ED','1')

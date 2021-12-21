@@ -415,23 +415,21 @@
 
 # class main: # 메인 메서드 동작 및 Head / Tail 생성문
 #     def __init__(self) -> None:
-#         self.head = None
 #         self.tail = None
 
 #     def end_insert(self,data):
 #         new_node = Node(data)
 
-#         if self.head is None:
-#             self.head = new_node 
+#         if self.head is None: 
 #             self.tail = new_node
 #         else:                  
 #             self.tail.next = new_node
+#             new_node.next = self.tail
 #             self.tail = new_node
-#             self.tail.next = self.head
 
 #     def select_insert(self, data, pick_node):
 #         new_node = Node(data)
-#         search = self.head
+#         search = self.tail
 
 #         while self.head is not None:
 #             if self.tail.data == pick_node:
@@ -448,17 +446,17 @@
 
 
 #     def select_remove(self, pick_node):
-#         prev_node = self.head
-#         current_node = self.head.next
+#         prev_node = self.tail
+#         current_node = self.tail.next
 
-#         while self.head is not None:
-#             if self.head.data == pick_node:
-#                 self.head.next = None
-#                 self.head = current_node
-#                 self.tail.next = self.head
+#         while self.tail is not None:
+#             if self.tail.data == pick_node:
+#                 self.tail.next = None
+#                 self.tail = current_node
 #                 break
 #             if current_node.data == pick_node:
 #                 prev_node.next = current_node.next
+#                 current_node = None
 #                 break
 #             else:
 #                 prev_node = current_node
@@ -490,23 +488,111 @@
 # 해시 테이블은 키(key)-값(value) 형태로 저장되는 자료구조이다. 키를 해시함수에 넣고 나오는 인덱스를 슬롯 인덱스로 지정해 값을 저장한다.
 # 구현 목록 : 해시 함수
 
+import time
+
+class Node:
+    def __init__(self, data, next = None) -> None:
+        self.data = data
+        self.next = next
+
 
 class Hash:
     def __init__(self, length) -> None:
         self.size = length
-        self.hastable = [i for i in range(length)]
+        self.hashtable = [0 for _ in range(length)]
         
-    def save(self):
-        pass
-    
-    def getKey(self,key):
-        self.key = ord(key[0])
+    def save(self, key, value):
+        if self.hashtable[self.hash_function(key)] == 0:
+            self.hashtable[self.hash_function(key)] = Node(value)
+        else:
+            self.hashtable[self.hash_function(key)].next = Node(value)
+        return self.hashtable
+
+    def hash_function(self,key):
+        self.key = ord(key[0]) % self.size
         return self.key
 
+    def remove_value(self, key):
+        self.hashtable[self.hash_function(key)] = 0
+        return print(self.hashtable)
 
-
+    def open_bucket(self):
+        iterator = self.hashtable
 
 
 if __name__ == '__main__':
+    average = 0
     ht = Hash(10)
-    ht.save('ED','1')
+    for _ in range(10):
+        start = time.time()
+        ht.save('ED','1')
+        ht.save('abc','2')
+        ht.save('back','3')
+        ht.save('cack', '4')
+        average += (time.time()-start)
+    print(average / 10)
+    #6.31809
+    # ht.open_bucket()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# open hashing
+# class OpenHash:
+#     def __init__(self, table_size):
+#         self.size = table_size
+#         self.hash_table = [0 for a in range(self.size)]
+        
+#     def getKey(self, data):
+#         self.key = ord(data[0])
+#         return self.key
+    
+#     def hashFunction(self, key):
+#         return key % self.size
+
+#     def getAddress(self, key):
+#         myKey = self.getKey(key)
+#         hash_address = self.hashFunction(myKey)
+#         return hash_address
+    
+#     def save(self, key, value):
+#         hash_address = self.getAddress(key)
+        
+#         if self.hash_table[hash_address] != 0:
+#             for a in range(len(self.hash_table[hash_address])):
+#                 if self.hash_table[hash_address][a][0] == key:
+#                     self.hash_table[hash_address][a][1] = value
+#                     return
+#             self.hash_table[hash_address].append([key, value])
+#         else:
+#             self.hash_table[hash_address] = [[key, value]]
+
+
+# if __name__ == '__main__':
+#     average = 0
+#     ht2 = OpenHash(10)
+#     for _ in range(10):
+#         start = time.time()
+#         ht2.save('ED', '1')
+#         ht2.save('abc', '2')
+#         ht2.save('back', '3')
+#         ht2.save('cack', '4')
+#         average += (time.time()-start)
+#     print(average / 10)
+    #1.486669

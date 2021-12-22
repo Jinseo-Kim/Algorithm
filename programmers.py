@@ -500,13 +500,19 @@ class Hash:
     def __init__(self, length) -> None:
         self.size = length
         self.hashtable = [0 for _ in range(length)]
+        self.cnt = 0
         
     def save(self, key, value):
-        if self.hashtable[self.hash_function(key)] == 0:
-            self.hashtable[self.hash_function(key)] = Node(value)
-        else:
-            self.hashtable[self.hash_function(key)].next = Node(value)
-        return self.hashtable
+        my_key = self.hash_function(key)
+        if self.cnt == self.size:
+            return False
+        while self.hashtable[my_key] != 0:
+            my_key += 1
+            if my_key == self.size:
+                my_key = 0
+
+        self.hashtable[my_key] = value
+        self.cnt += 1
 
     def hash_function(self,key):
         self.key = ord(key[0]) % self.size
@@ -523,31 +529,13 @@ class Hash:
 if __name__ == '__main__':
     average = 0
     ht = Hash(10)
-    for _ in range(10):
-        start = time.time()
-        ht.save('ED','1')
-        ht.save('abc','2')
-        ht.save('back','3')
-        ht.save('cack', '4')
-        average += (time.time()-start)
-    print(average / 10)
+    ht.save('ED','1')
+    ht.save('abc','2')
+    ht.save('back','3')
+    ht.save('cack', '4')
+    print(ht.hashtable)
     #6.31809
     # ht.open_bucket()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

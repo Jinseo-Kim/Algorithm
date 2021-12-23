@@ -488,54 +488,70 @@
 # 해시 테이블은 키(key)-값(value) 형태로 저장되는 자료구조이다. 키를 해시함수에 넣고 나오는 인덱스를 슬롯 인덱스로 지정해 값을 저장한다.
 # 구현 목록 : 해시 함수
 
-import time
+# import time
 
-class Node:
-    def __init__(self, data, next = None) -> None:
-        self.data = data
-        self.next = next
+# class Node:
+#     def __init__(self, data, next = None) -> None:
+#         self.data = data
+#         self.next = next
 
 
-class Hash:
-    def __init__(self, length) -> None:
-        self.size = length
-        self.hashtable = [0 for _ in range(length)]
-        self.cnt = 0
+# class Hash:
+#     def __init__(self, length) -> None:
+#         self.size = length
+#         self.hashtable = [0 for _ in range(length)]
+#         self.cnt = 0
         
-    def save(self, key, value):
-        my_key = self.hash_function(key)
-        if self.cnt == self.size:
-            return False
-        while self.hashtable[my_key] != 0:
-            my_key += 1
-            if my_key == self.size:
-                my_key = 0
+#     def save(self, key, value):
+#         self.hashtable[self.hash_function(key)] = value
+#         self.cnt += 1
 
-        self.hashtable[my_key] = value
-        self.cnt += 1
+#     def hash_function(self,key):
+#         self.key = ord(key[0]) % self.size
+#         return self.key
 
-    def hash_function(self,key):
-        self.key = ord(key[0]) % self.size
-        return self.key
+#     def remove_value(self, key):
+#         self.hashtable[self.hash_function(key)] = 0
+#         return print(self.hashtable)
 
-    def remove_value(self, key):
-        self.hashtable[self.hash_function(key)] = 0
-        return print(self.hashtable)
+#     def open_bucket(self):
+#         iterator = self.hashtable
 
-    def open_bucket(self):
-        iterator = self.hashtable
+# class Hash_Chaining(Hash):
+#     def save(self, key, value):
+#         if self.hashtable[self.hash_function(key)] == 0:
+#             self.hashtable[self.hash_function(key)] = Node(value)
+#         else:
+#             self.hashtable[self.hash_function(key)].next = Node(value)
+#         return self.hashtable
+
+# class Hash_Linear(Hash):
+#     def save(self, key, value):
+#         my_key = self.hash_function(key)
+#         if self.cnt == self.size:
+#             return False
+
+#         while self.hashtable[my_key] != 0:
+#             my_key += 1
+#             if my_key == self.size:
+#                 my_key = 0
+
+#         self.hashtable[my_key] = value
+#         self.cnt += 1
 
 
-if __name__ == '__main__':
-    average = 0
-    ht = Hash(10)
-    ht.save('ED','1')
-    ht.save('abc','2')
-    ht.save('back','3')
-    ht.save('cack', '4')
-    print(ht.hashtable)
-    #6.31809
-    # ht.open_bucket()
+
+
+# if __name__ == '__main__':
+#     average = 0
+#     ht = Hash_Chaining(10)
+#     ht.save('ED','1')
+#     ht.save('abc','2')
+#     ht.save('back','3')
+#     ht.save('cack', '4')
+#     print(ht.hashtable)
+#     #6.31809
+#     ht.open_bucket()
 
 
 
@@ -583,4 +599,42 @@ if __name__ == '__main__':
 #         ht2.save('cack', '4')
 #         average += (time.time()-start)
 #     print(average / 10)
-    #1.486669
+#     1.486669
+
+
+
+
+
+
+
+
+# 트리 자료구조 (https://www.acmicpc.net/problem/5639)
+
+import sys
+class Node:
+    def __init__(self, data, right = None, left = None) -> None:
+        self.data = data
+        self.left = left
+        self.right = right
+
+class Tree:
+    def __init__(self) -> None:
+        self.root = None
+
+    def add(self, data):
+        new_node = Node(data)
+
+        if self.root is None:
+            self.root = new_node
+
+        if self.root.data > data:
+            self.root.left = new_node
+            self.root = new_node
+        elif self.root.data < data:
+            self.root.right = new_node
+            self.root = new_node
+
+if __name__ == '__main+__':
+    tr = Tree()
+    while True:
+        tr.add(int(sys.stdin.readline()))

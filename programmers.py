@@ -623,18 +623,18 @@ class Tree:
 
     def add(self, data):
         new_node = Node(data)
-
         if self.root is None:
             self.root = new_node
+        self.preorder(self.root)
 
-        if self.root.data > data:
-            self.root.left = new_node
-            self.root = new_node
-        elif self.root.data < data:
-            self.root.right = new_node
-            self.root = new_node
+    def preorder(self,node):
+        if node.left is None:
+            return node.left
+        
 
-if __name__ == '__main+__':
+        
+
+if __name__ == '__main__':
     tr = Tree()
     while True:
         tr.add(int(sys.stdin.readline()))

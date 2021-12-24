@@ -625,16 +625,28 @@ class Tree:
         new_node = Node(data)
         if self.root is None:
             self.root = new_node
-        self.preorder(self.root)
+        else:
+            self.preorder(self.root, new_node)
 
-    def preorder(self,node):
-        if node.left is None:
-            return node.left
+    def preorder(self, node, new_node):
+        if node.left is not None:
+            self.preorder(node.left, new_node)
+        elif node.data > new_node.data:
+            node.left = new_node
+
+        if node.right is not None:
+            self.preorder(node.right, new_node)
+        elif node.data < new_node.data:
+            node.right = new_node
         
 
         
 
 if __name__ == '__main__':
     tr = Tree()
-    while True:
+    for i in range(5):
         tr.add(int(sys.stdin.readline()))
+        print(f'left : {tr.root.left}  data : {tr.root.data}  right : {tr.root.right}')
+        if i > 0:
+            print(f'left : {tr.root.left.data}  data : {tr.root.data}  right : {tr.root.right}')
+        

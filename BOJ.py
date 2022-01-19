@@ -133,44 +133,21 @@ class circle_queue:
         for i in range(self.cnt):
             print(self.queue[i])
 
-class fix_circle_queue(circle_queue):
-    def __init__(self,length) -> None:
-        self.queue = [0]
-        self.cnt = 1
-        self.front = self.queue[0]
-        self.rear = self.queue[0]
-
-    def enqueue(self, num):
-        if self.empty is not False:
-            self.rear = (self.rear+1) % len(self.queue)
-            self.queue.append(num)
-            self.cnt +=1
-        else:
-            return False
-    
-    def dequeue(self):
-        if self.empty is not False:
-            self.queue[self.front] = 0
-            self.front = (self.front+1) % len(self.queue)
-            print(self.queue[self.front])
-            self.cnt -= 1
-
-# cq = circle_queue(int(input()))
-fix_cq = fix_circle_queue(int(input()))
+cq = circle_queue(int(input()))
 for _ in range(int(input())):
     command = input().split()
 
     if command[0] == 'enqueue':
-        fix_cq.enqueue(command[1])
+        cq.enqueue(command[1])
 
     if command[0] == 'dequeue':
-        fix_cq.dequeue()
+        cq.dequeue()
 
     if command[0] == 'size':
-        fix_cq.size()
+        cq.size()
 
     if command[0] == 'empty':
-        fix_cq.empty()
+        cq.empty()
 
     if command[0] == 'display':
-        fix_cq.display()
+        cq.display()

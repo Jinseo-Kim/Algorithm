@@ -96,58 +96,94 @@
 # print('>')
 
 # 환형 큐 구현
-class circle_queue:
-    def __init__(self,length) -> None:
-        self.queue = [0]*length
-        self.cnt = 0
-        self.front = self.queue[0]
-        self.rear = self.queue[0]
+# class circle_queue:
+#     def __init__(self,length) -> None:
+#         self.queue = [0]*length
+#         self.cnt = 0
+#         self.front = self.queue[0]
+#         self.rear = self.queue[0]
 
-    def enqueue(self, num):
-        if self.empty is not False:
-            self.rear = (self.rear+1) % len(self.queue)
-            self.queue[self.rear] = num
-            self.cnt +=1
-        else:
-            return False
+#     def enqueue(self, num):
+#         if self.empty is not False:
+#             self.rear = (self.rear+1) % len(self.queue)
+#             self.queue[self.rear] = num
+#             self.cnt +=1
+#         else:
+#             return False
 
-    def dequeue(self):
-        if self.empty is not False:
-            self.front = (self.front+1) % len(self.queue)
-            print(self.queue.pop(self.front))
-            self.queue.append(0)
-            self.cnt -= 1
+#     def dequeue(self):
+#         if self.empty is not False:
+#             self.front = (self.front+1) % len(self.queue)
+#             print(self.queue.pop(self.front))
+#             self.queue.append(0)
+#             self.cnt -= 1
 
-    def size(self):
-        print(self.cnt)
+#     def size(self):
+#         print(self.cnt)
 
-    def empty(self):
-        if self.cnt == 0:
-            return False
-        return True
+#     def empty(self):
+#         if self.cnt == 0:
+#             return False
+#         return True
     
-    def display(self):
-        if self.cnt == 1:
-            return False
-        print(f'길이는 : {len(self.queue)}')
-        for i in range(self.cnt):
-            print(self.queue[i])
+#     def display(self):
+#         if self.cnt == 1:
+#             return False
+#         print(f'길이는 : {len(self.queue)}')
+#         for i in range(self.cnt):
+#             print(self.queue[i])
 
-cq = circle_queue(int(input()))
+# cq = circle_queue(int(input()))
+# for _ in range(int(input())):
+#     command = input().split()
+
+#     if command[0] == 'enqueue':
+#         cq.enqueue(command[1])
+
+#     if command[0] == 'dequeue':
+#         cq.dequeue()
+
+#     if command[0] == 'size':
+#         cq.size()
+
+#     if command[0] == 'empty':
+#         cq.empty()
+
+#     if command[0] == 'display':
+#         cq.display()
+
+
+# BOJ 9012 괄호
+# 괄호 문자열(Parenthesis String, PS)은 두 개의 괄호 기호인 ‘(’ 와 ‘)’ 만으로 구성되어 있는 문자열이다. 
+# 그 중에서 괄호의 모양이 바르게 구성된 문자열을 올바른 괄호 문자열(Valid PS, VPS)이라고 부른다.
+# 여러분은 입력으로 주어진 괄호 문자열이 VPS 인지 아닌지를 판단해서 그 결과를 YES 와 NO 로 나타내어야 한다.
+
+
+# 1. T번 반복하며 입력받기
+# 2. 각 횟수당 YES, NO 형태로 출력하기
+# - 조건 : 시작하는 문자열이 )이면 안되며, 끝나는 문자열이 (이면 안된다.
+#         괄호의 개수는 짝수여야한다.
+#         스택을 통해 구현하며 ( 괄호를 더하고 )을 만나면 하나씩 pop한다. 이후 마지막까지 돌았으나 잔여 스택의 개수가 0이면 YES
+import sys
+
 for _ in range(int(input())):
-    command = input().split()
+    stack = []
+    vps = sys.stdin.readline().strip()
 
-    if command[0] == 'enqueue':
-        cq.enqueue(command[1])
+    if len(vps) % 2 == 1:
+        print('first if')
+        print('NO')
 
-    if command[0] == 'dequeue':
-        cq.dequeue()
+    elif vps[0] == ')' or vps[-1] == '(':
+        print('second if')
+        print('NO')
 
-    if command[0] == 'size':
-        cq.size()
-
-    if command[0] == 'empty':
-        cq.empty()
-
-    if command[0] == 'display':
-        cq.display()
+    else:
+        for i in vps:
+            if i == '(':
+                stack.append('(')
+            if i == ')' and len(stack) >= 1:
+                stack.pop()
+            else:
+                print('NO')
+                break

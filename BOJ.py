@@ -164,26 +164,68 @@
 # - 조건 : 시작하는 문자열이 )이면 안되며, 끝나는 문자열이 (이면 안된다.
 #         괄호의 개수는 짝수여야한다.
 #         스택을 통해 구현하며 ( 괄호를 더하고 )을 만나면 하나씩 pop한다. 이후 마지막까지 돌았으나 잔여 스택의 개수가 0이면 YES
+# import sys
+
+# for _ in range(int(input())):
+#     stack = []
+#     vps = sys.stdin.readline().strip()
+
+#     if len(vps) % 2 == 1:
+#         print('NO')
+
+#     elif vps[0] == ')' or vps[-1] == '(':
+#         print('NO')
+
+#     else:
+#         for i in vps:
+#             if i == '(':
+#                 stack.append('(')
+#             if i == ')':
+#                 if len(stack) > 0:
+#                     stack.pop()
+#                 else:
+#                     stack.append('underflow')
+#                     break
+        
+#         if len(stack) > 0:
+#             print('NO')
+#         else:
+#             print('YES')
+
+# BOJ 10773 제로
+# 첫 번째 줄에 정수 K가 주어진다. (1 ≤ K ≤ 100,000)
+# 이후 K개의 줄에 정수가 1개씩 주어진다. 정수는 0에서 1, 000, 000 사이의 값을 가지며, 정수가 "0" 일 경우에는 
+# 가장 최근에 쓴 수를 지우고, 아닐 경우 해당 수를 쓴다.
+# 정수가 "0"일 경우에 지울 수 있는 수가 있음을 보장할 수 있다.
+# import sys
+
+# stack = []
+# for _ in range(int(input())):
+#     num = int(sys.stdin.readline())
+#     if num > 0:
+#         stack.append(num)
+#     if num == 0:
+#         stack.pop()
+# print(sum(stack))
+
+# BOJ 10799 쇠막대기
+# 여러 개의 쇠막대기를 레이저로 절단하려고 한다. 효율적인 작업을 위해서 쇠막대기를 아래에서 위로 겹쳐 놓고, 
+# 레이저를 위에서 수직으로 발사하여 쇠막대기들을 자른다.
+# 이러한 레이저와 쇠막대기의 배치는 다음과 같이 괄호를 이용하여 왼쪽부터 순서대로 표현할 수 있다.
+# - 레이저는 여는 괄호와 닫는 괄호의 인접한 쌍 ‘( ) ’ 으로 표현된다. 또한, 모든 ‘( ) ’는 반드시 레이저를 표현한다.
+# - 쇠막대기의 왼쪽 끝은 여는 괄호 ‘ ( ’ 로, 오른쪽 끝은 닫힌 괄호 ‘) ’ 로 표현된다. 
+1. ()이 비로소 레이저를 뜻하기 때문에 (을 더해가다가 )을 만나면 그 순간 앞에 있는 막대기의 ( 개수에 따라 절단이 이루어진다.
+2. () 이후)이 하나 더나온다면 이것은 레이저가 아니라 막대기의 끝을 의미한다. 이때를 구분하는 코드가 들어가야한다.
+3. 막대기 개수를 세는 게 아니라 절단 횟수를 세었기 때문에 막대기의 끝에는 그게 +1 더해야한다.
+3. 전체 막대기의 절단 개수를 세고 이걸 변수에 넣는다.
+
 import sys
 
-for _ in range(int(input())):
-    stack = []
-    vps = sys.stdin.readline().strip()
-
-    if len(vps) % 2 == 1:
-        print('first if')
-        print('NO')
-
-    elif vps[0] == ')' or vps[-1] == '(':
-        print('second if')
-        print('NO')
-
-    else:
-        for i in vps:
-            if i == '(':
-                stack.append('(')
-            if i == ')' and len(stack) >= 1:
-                stack.pop()
-            else:
-                print('NO')
-                break
+stack = []
+result = 0
+for i in sys.stdin.readline().strip():
+    if i == '(':
+        stack.append('(')
+    if i == ')':
+        stack.pop()
+        result += len(stack)

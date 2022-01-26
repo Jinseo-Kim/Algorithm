@@ -77,23 +77,20 @@
 
 # BOJ 1158 요세푸스 문제
 # 요세푸스 문제는 다음과 같다. 1번부터 N번까지 N명의 사람이 원을 이루면서 앉아있고, 양의 정수 K(≤ N)가 주어진다. 이제 순서대로 K번째 사람을 제거한다.
-
-# def kill(k):
-#     for _ in range(k-1):
-#         n.append(n.pop(0))
-
-#     result.append(n.pop(0))
+# N+1개의 배열인 환형큐 회전하며 출력필요
+# from collections import deque
 
 # n, k = map(int, input().split())
-# n = [*range(1, n+1)]
-# result = []
+# deq = deque([*range(1, n+1)])
 
-# for _ in range(len(n)):
-#     kill(k)
+# print('<', end = '')
+# for _ in range(len(deq)-1):
+#     for _ in range(k-1):
+#         deq.append(deq.popleft())
 
-# print('<', end='')
-# print(*result, sep = ', ', end = '')
-# print('>')
+#     print(f'{deq.popleft()}, ', end = '')
+
+# print(f'{deq[0]}>')
 
 # 환형 큐 구현
 # class circle_queue:
@@ -192,7 +189,7 @@
 #         else:
 #             print('YES')
 
-# BOJ 10773 제로
+# BOJ 10799 제로
 # 첫 번째 줄에 정수 K가 주어진다. (1 ≤ K ≤ 100,000)
 # 이후 K개의 줄에 정수가 1개씩 주어진다. 정수는 0에서 1, 000, 000 사이의 값을 가지며, 정수가 "0" 일 경우에는 
 # 가장 최근에 쓴 수를 지우고, 아닐 경우 해당 수를 쓴다.
@@ -219,21 +216,55 @@
 # 3. 막대기 개수를 세는 게 아니라 절단 횟수를 세었기 때문에 막대기의 끝에는 그게 +1 더해야한다.
 # 3. 전체 막대기의 절단 개수를 세고 이걸 변수에 넣는다.
 
+# import sys
+
+# stack = []
+# result = 0
+# chg = 0
+# for i in sys.stdin.readline().strip():
+#     if i == '(':
+#         stack.append('(')
+#         chg = 1
+#     if i == ')':
+#         if chg == 1:
+#             stack.pop()
+#             result += len(stack)
+#             chg = 0
+#         elif chg == 0:
+#             stack.pop()
+#             result += 1
+# print(result)
+
+
+
+
+
+# BOJ 1935 후위 표기식
+# 1. postfix의 횟수만큼 순회
+# 2. 각 숫자를 입력받고 영어대문자가 나올 때마다 입력.
 import sys
 
+N = int(input())
+postfix = list(input())
 stack = []
-result = 0
-chg = 0
-for i in sys.stdin.readline().strip():
-    if i == '(':
-        stack.append('(')
-        chg = 1
-    if i == ')':
-        if chg == 1:
-            stack.pop()
-            result += len(stack)
-            chg = 0
-        elif chg == 0:
-            stack.pop()
-            result += 1
-print(result)
+cnt = 0
+
+for i in postfix:
+    if i == '+':
+        stack.append(stack.pop()+stack.pop())
+    elif i == '-':
+        last = stack.pop()
+        stack.append(stack.pop()-last)
+    elif i == '*':
+        stack.append(stack.pop()*stack.pop())
+    elif i == '/':
+        last = stack.pop()
+        stack.append(stack.pop()/last)
+    else:
+        if cnt == N:
+            stack.append(solo)
+        if cnt != N:
+            stack.append(int(sys.stdin.readline()))
+            solo = stack[0]
+            cnt += 1
+print(format(*stack,".2f"))

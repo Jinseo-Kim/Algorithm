@@ -242,29 +242,147 @@
 # BOJ 1935 후위 표기식
 # 1. postfix의 횟수만큼 순회
 # 2. 각 숫자를 입력받고 영어대문자가 나올 때마다 입력.
+# import sys
+
+# N = int(input())
+# postfix = list(input())
+# stack = []
+# cnt = 0
+
+# for i in postfix:
+#     if i == '+':
+#         stack.append(stack.pop()+stack.pop())
+#     elif i == '-':
+#         last = stack.pop()
+#         stack.append(stack.pop()-last)
+#     elif i == '*':
+#         stack.append(stack.pop()*stack.pop())
+#     elif i == '/':
+#         last = stack.pop()
+#         stack.append(stack.pop()/last)
+#     else:
+#         if cnt == N:
+#             stack.append(solo)
+#         if cnt != N:
+#             stack.append(int(sys.stdin.readline()))
+#             solo = stack[0]
+#             cnt += 1
+# print(format(*stack,".2f"))
+
+
+
+
+# BOJ 11005 진법 변환 2 
+# 10진법 수 N이 주어진다. 이 수를 B진법으로 바꿔 출력하는 프로그램을 작성하시오.
+# 10진법을 넘어가는 진법은 숫자로 표시할 수 없는 자리가 있다. 이런 경우에는 다음과 같이 알파벳 대문자를 사용한다.
+# A: 10, B: 11, ..., F: 15, ..., Y: 34, Z: 35
+
+# N, B = map(int,input().split())
+# result = []
+
+# while N != 0:
+#     if N % B >= 10:
+#         result.append(chr((N % B)+55))
+#     else:
+#         result.append(str(N % B))
+#     N = N//B
+
+# print(*result[::-1], sep = '')
+
+
+
+
+# BOJ 2745 진법 변환
+# B진법 수 N이 주어진다. 이 수를 10진법으로 바꿔 출력하는 프로그램을 작성하시오.
+# 10진법을 넘어가는 진법은 숫자로 표시할 수 없는 자리가 있다. 이런 경우에는 다음과 같이 알파벳 대문자를 사용한다.
+# A: 10, B: 11, ..., F: 15, ..., Y: 34, Z: 35
+
+# N, B = map(str,input().split())
+# string = list(N)
+# string.reverse()
+# result = 0
+
+# for i,j in enumerate(string):
+#     if ord(j) >= 65:
+#         result += int(B)**i*(ord(j)-55)
+#     else:
+#         result += int(B)**i*int(j)
+
+# print(result)
+
+
+
+
+# BOJ 1212 8진수 2진수
+# 8진수가 주어졌을 때, 2진수로 변환하는 프로그램을 작성하시오.
+
+# num = '0o'+input()
+# print(bin(int(num, 8))[2:])
+
+
+
+
+# BOJ 1373 2진수 8진수
+# 2진수가 주어졌을 때, 8진수로 변환하는 프로그램을 작성하시오.
+
+# num = '0b'+input()
+# print(oct(int(num, 2))[2:])
+
+
+
+
+# BOJ 10988 팰린드롬인지 확인하기
+# 알파벳 소문자로만 이루어진 단어가 주어진다. 이때, 이 단어가 팰린드롬인지 아닌지 확인하는 프로그램을 작성하시오.
+# 팰린드롬이란 앞으로 읽을 때와 거꾸로 읽을 때 똑같은 단어를 말한다.
+# level, noon은 팰린드롬이고, baekjoon, online, judge는 팰린드롬이 아니다.
+
+# string = input()
+
+# if string == string[::-1]:
+#     print(1)
+# else:
+#     print(0)
+
+
+
+
+# BOJ 2588 곱셈
+# 첫째 줄에 (1)의 위치에 들어갈 세 자리 자연수가, 둘째 줄에 (2)의 위치에 들어갈 세자리 자연수가 주어진다.
+
+# first_num = int(input())
+# second_num = int(input())
+# arr_sec = [int(i) for i in str(second_num)]
+# arr_sec.reverse()
+
+# for i in arr_sec:
+#     print(first_num * i)
+
+# print(first_num * second_num)
+
+
+
+
+# BOJ 2490 윷놀이
+# 우리나라 고유의 윷놀이는 네 개의 윷짝을 던져서 배(0)와 등(1)이 나오는 숫자를 세어 도, 개, 걸, 윷, 모를 결정한다.
+# 네 개 윷짝을 던져서 나온 각 윷짝의 배 혹은 등 정보가 주어질 때 
+# 도(배 한 개, 등 세 개), 개(배 두 개, 등 두 개), 걸(배 세 개, 등 한 개), 윷(배 네 개), 모(등 네 개) 중 어떤 것인지를 결정하는 프로그램을 작성하라.
+# yut_result = ['E','A','B','C','D']
+
+# for _ in range(3):
+#     yut = list(map(str,input().split()))
+#     print(yut_result[yut.count('0')])
+
+
+
+
+# BOJ 11650 좌표 정렬하기
+# 2차원 평면 위의 점 N개가 주어진다. 좌표를 x좌표가 증가하는 순으로, x좌표가 같으면 y좌표가 증가하는 순서로 
+# 정렬한 다음 출력하는 프로그램을 작성하시오.
 import sys
 
-N = int(input())
-postfix = list(input())
-stack = []
-cnt = 0
+result = []
+for i in range(int(input())):
+    result.append(list(map(int,sys.stdin.readline().split())))
 
-for i in postfix:
-    if i == '+':
-        stack.append(stack.pop()+stack.pop())
-    elif i == '-':
-        last = stack.pop()
-        stack.append(stack.pop()-last)
-    elif i == '*':
-        stack.append(stack.pop()*stack.pop())
-    elif i == '/':
-        last = stack.pop()
-        stack.append(stack.pop()/last)
-    else:
-        if cnt == N:
-            stack.append(solo)
-        if cnt != N:
-            stack.append(int(sys.stdin.readline()))
-            solo = stack[0]
-            cnt += 1
-print(format(*stack,".2f"))
+result.sort()
+print(*result)

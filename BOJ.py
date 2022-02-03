@@ -399,14 +399,37 @@
 # 3. 국어 점수와 영어 점수가 같으면 수학 점수가 감소하는 순서로
 # 4. 모든 점수가 같으면 이름이 사전 순으로 증가하는 순서로(단, 아스키 코드에서 대문자는 소문자보다 작으므로 사전순으로 앞에 온다.)
 
-import sys
+# import sys
 
-do_class =[]
-for _ in range(int(input())):
-    result = [int(j) if i > 0 else j for i,j in enumerate(sys.stdin.readline().split())]
-    do_class.append(result)
+# do_class =[]
+# for _ in range(int(input())):
+#     result = [int(j) if i > 0 else j for i,j in enumerate(sys.stdin.readline().split())]
+#     do_class.append(result)
 
-do_class.sort(key = lambda x: (-x[1], x[2], -x[3], x[0]))
+# do_class.sort(key = lambda x: (-x[1], x[2], -x[3], x[0]))
 
-for i in do_class:
-    print(i[0])
+# for i in do_class:
+#     print(i[0])
+
+
+
+
+# BOJ 2609 최대공약수와 최소공배수
+# 두 개의 자연수를 입력받아 최대 공약수와 최소 공배수를 출력하는 프로그램을 작성하시오.
+# 첫째 줄에는 두 개의 자연수가 주어진다. 이 둘은 10,000이하의 자연수이며 사이에 한 칸의 공백이 주어진다.
+# 유클리드 호제법 (정독!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)
+
+# a, b = map(int,input().split())
+# org_a, org_b = a, b
+
+# while True:
+#     if b > a:
+#         a, b = b, a
+#     if a % b == 0:
+#         break
+#     else:
+#         a = a % b
+
+# org_a = org_a // b
+# org_b = org_b // b
+# print(f'{b}\n{org_a * org_b * b}')

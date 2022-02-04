@@ -441,26 +441,105 @@
 # 양의 정수 n개가 주어졌을 때, 가능한 모든 쌍의 GCD의 합을 구하는 프로그램을 작성하시오.
 # 첫째 줄에 테스트 케이스의 개수 t (1 ≤ t ≤ 100)이 주어진다. 각 테스트 케이스는 한 줄로 이루어져 있다
 # 각 테스트 케이스는 수의 개수 n (1 < n ≤ 100)가 주어지고, 다음에는 n개의 수가 주어진다.
-from itertools import combinations
-import sys
+# from itertools import combinations
+# import sys
 
 
-def gcd(ncm):
-    while True:
-        if ncm[1] > ncm[0]:
-            ncm[0], ncm[1] = ncm[1], ncm[0]
+# def gcd(ncm):
+#     while True:
+#         if ncm[1] > ncm[0]:
+#             ncm[0], ncm[1] = ncm[1], ncm[0]
 
-        if ncm[0] % ncm[1] == 0:
-            return ncm[1]
+#         if ncm[0] % ncm[1] == 0:
+#             return ncm[1]
 
-        ncm[0] = ncm[0] % ncm[1] 
+#         ncm[0] = ncm[0] % ncm[1] 
 
 
-for _ in range(int(input())):
-    result = 0
-    n, *nums = map(int,sys.stdin.readline().split())
-    unpack_nums = list(map(list, combinations(nums,2)))
+# for _ in range(int(input())):
+#     result = 0
+#     n, *nums = map(int,sys.stdin.readline().split())
+#     unpack_nums = list(map(list, combinations(nums,2)))
 
-    for ncm in unpack_nums:
-        result += gcd(ncm)
-    print(result)
+#     for ncm in unpack_nums:
+#         result += gcd(ncm)
+#     print(result)
+
+
+
+
+# BOJ 15650 N과 M (2)
+# 자연수 N과 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오.
+# 1부터 N까지 자연수 중에서 중복 없이 M개를 고른 수열
+# 고른 수열은 오름차순이어야 한다.
+# 첫째 줄에 자연수 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 8)
+
+# from itertools import combinations
+
+# n, m = map(int,input().split())
+# li_n = list(range(1, n+1))
+
+# for i in combinations(li_n, m):
+#     print(*i)
+
+
+
+
+# BOJ 15649 N과 M (1)
+# 자연수 N과 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오.
+# 1부터 N까지 자연수 중에서 중복 없이 M개를 고른 수열
+
+# from itertools import permutations
+
+# N, M = map(int,input().split())
+# N = list(range(1,N+1))
+
+# for i in permutations(N, M):
+#     print(*i)
+
+
+
+
+# BOJ 2595 대표값
+# 첫째 줄부터 열 번째 줄까지 한 줄에 하나씩 자연수가 주어진다. 주어지는 자연수는 1,000 보다 작은 10의 배수이다.
+# 첫째 줄에는 평균을 출력하고, 둘째 줄에는 최빈값을 출력한다. 최빈값이 둘 이상일 경우 그 중 하나만 출력한다. 평균과 최빈값은 모두 자연수이다.
+
+# from collections import Counter
+
+# arr = []
+# for _ in range(10):
+#     arr.append(int(input()))
+
+# print(sum(arr)//10)
+# print(Counter(arr).most_common()[0][0])
+
+
+
+
+# BOJ 1935 후위 표기식2
+# 이 문제 다시 풀어보기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# import sys
+
+# N = int(input())
+# stack = []
+# cnt = 0
+
+# for i in input():
+#     if i == '+':
+#         stack.append(stack.pop()+stack.pop())
+#     elif i == '-':
+#         last = stack.pop()
+#         stack.append(stack.pop()-last)
+#     elif i == '*':
+#         stack.append(stack.pop()*stack.pop())
+#     elif i == '/':
+#         last = stack.pop()
+#         stack.append(stack.pop()/last)
+#     else:
+#         if cnt == N:
+#             stack.append(solo)
+#         if cnt != N:
+#             stack.append(int(sys.stdin.readline()))
+#             solo = stack[0]
+#             cnt += 1
+# print(format(*stack,".2f"))

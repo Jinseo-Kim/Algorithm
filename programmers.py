@@ -629,24 +629,41 @@ class Tree:
             self.preorder(self.root, new_node)
 
     def preorder(self, node, new_node):
-        if node.left is not None:
-            self.preorder(node.left, new_node)
-        elif node.data > new_node.data:
-            node.left = new_node
+        if node.data > new_node.data:
+            if node.left is not None:
+                self.preorder(node.left, new_node)
+            else:
+                node.left = new_node
 
-        if node.right is not None:
-            self.preorder(node.right, new_node)
         elif node.data < new_node.data:
-            node.right = new_node
+            if node.right is not None:
+                self.preorder(node.right, new_node)
+            else:
+                node.right = new_node
         
+        # 초기 작성 코드. 이 코드는 left의 리프까지 진입 후 right도 비교하도록 되어있어 이전 부모 노드에서 채워야했을 값들도 리프에서 채워지는 이슈 발생. 하여 초기로 돌아가 상위 코드 작성.
+        # if node.left is not None:
+        #     self.preorder(node.left, new_node)
+        # elif node.data > new_node.data:
+        #     node.left = new_node
 
+        # if node.right is not None:
+        #     self.preorder(node.right, new_node)
+        # elif node.data < new_node.data:
+        #     node.right = new_node
         
+    def print_postorder(self, node):
+        if node is not None:
+            if node.left is not None:
+                self.print_postorder(node.left)
+            if node.right is not None:
+                self.print_postorder(node.right)
+            print(node.data)
 
 if __name__ == '__main__':
     tr = Tree()
-    for i in range(5):
+    while True:
         tr.add(int(sys.stdin.readline()))
-        print(f'left : {tr.root.left}  data : {tr.root.data}  right : {tr.root.right}')
-        if i > 0:
-            print(f'left : {tr.root.left.data}  data : {tr.root.data}  right : {tr.root.right}')
+        
+    tr.print_postorder(tr.root)
         

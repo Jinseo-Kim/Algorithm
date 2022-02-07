@@ -621,18 +621,25 @@ for _ in range(int(input())):
     N, M = map(int,input().split())
     docs = deque(map(int,input().split()))
 
-    result = []
-    high = docs[0]
+    check = docs[M]
+    cnt = 0
+    result = 1
 
-    if len(docs) == 1:
-        print(high)
-        continue
+    while True:
+        if len(docs) == 1:
+            print(docs[0])
+            break
 
-    for i in range(1,N):
-        if docs[i] > high:
-            result.append(docs[i])
-            high = docs[i] 
+        if cnt == (M-1):
+            print(result)
+            break
 
-    print(result[-M-1])
-    
+        if check > docs[0]:
+            result += 1
+            check = docs[0]
+        cnt += 1        
+        docs.append(docs.popleft())
 
+    # 필요조건
+    # 1. 내가 찾으려는 수보다 높은 수가 있다면 그 수가 우선적으로 출력되어야 한다.
+    # 2. 만일 나와 동일하거나 같은 수가 있다면 재카운트 시작 1 1 9 1 1 1 의 경우 1 2 순서로 가다가 9를 만나 1로 초기화되고 1 1 1 카운트 내 차례인 1까지

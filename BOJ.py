@@ -615,31 +615,90 @@
 
 
 # BOJ 1966 프린터 큐
-from collections import deque
+# test_cases = int(input())
 
-for _ in range(int(input())):
-    N, M = map(int,input().split())
-    docs = deque(map(int,input().split()))
+# for _ in range(test_cases):
+#     n,m = list(map(int, input().split( )))
+#     imp = list(map(int, input().split( )))
+#     idx = list(range(len(imp)))
+#     idx[m] = 'target'
 
-    check = docs[M]
-    cnt = 0
-    result = 1
+#     # 순서
+#     order = 0
+    
+#     while True:
+#         # 첫번째 if: imp의 첫번째 값 = 최댓값?
+#         if imp[0]==max(imp):
+#             order += 1
+                        
+#             # 두번째 if: idx의 첫 번째 값 = "target"?
+#             if idx[0]=='target':
+#                 print(order)
+#                 break
+#             else:
+#                 imp.pop(0)
+#                 idx.pop(0)
 
-    while True:
-        if len(docs) == 1:
-            print(docs[0])
-            break
-
-        if cnt == (M-1):
-            print(result)
-            break
-
-        if check > docs[0]:
-            result += 1
-            check = docs[0]
-        cnt += 1        
-        docs.append(docs.popleft())
+#         else:
+#             imp.append(imp.pop(0))
+#             idx.append(idx.pop(0))   
 
     # 필요조건
     # 1. 내가 찾으려는 수보다 높은 수가 있다면 그 수가 우선적으로 출력되어야 한다.
     # 2. 만일 나와 동일하거나 같은 수가 있다면 재카운트 시작 1 1 9 1 1 1 의 경우 1 2 순서로 가다가 9를 만나 1로 초기화되고 1 1 1 카운트 내 차례인 1까지
+
+
+
+
+# BOJ 13335 트럭
+# n = 트럭의 수
+# w = 다리의 길이
+# L = 다리의 최대하중
+# from collections import deque
+
+# n, w, L = map(int,input().split())
+# queue = deque(map(int,input().split()))
+# result = 0
+# cnt = 0
+# start_truck = []
+
+# while True:
+#     if L > queue[0]:
+#         start_truck.append(queue.popleft())          # 7
+
+#         if len(queue) == 0:
+#             print(result + w + len(start_truck))
+#             break
+
+#         if sum(start_truck) + queue[0] > L:         # 7 + 4
+#             if len(start_truck) > 1:                # truck의 길이가 2 이상이면 length랑 2를 더해준다
+#                 result += len(start_truck) + w - 1
+#             else:
+#                 result += w
+#             start_truck = []
+
+from collections import deque
+
+n, w, L = map(int,input().split())
+queue = deque(map(int,input().split()))
+result = 0
+cnt = 0
+start_truck = 0
+
+while True:
+    if L > queue[0]:
+        start_truck += queue.popleft()
+        cnt += 1   
+        n -= 1          
+
+        if n == 0:
+            print(result + w + cnt)
+            break
+
+        if start_truck + queue[0] > L:
+            if n > 1:             
+                result += cnt + w
+            else:
+                result += w
+            start_truck = 0
+            cnt = 0

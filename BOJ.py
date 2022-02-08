@@ -677,28 +677,78 @@
 #                 result += w
 #             start_truck = []
 
-from collections import deque
+# from collections import deque
 
-n, w, L = map(int,input().split())
-queue = deque(map(int,input().split()))
-result = 0
-cnt = 0
-start_truck = 0
+# n, w, L = map(int,input().split())
+# queue = deque(map(int,input().split()))
+# result = 0
+# cnt = 0
+# start_truck = 0
+
+# while True:
+#     if L > queue[0]:
+#         start_truck += queue.popleft()
+#         cnt += 1   
+#         n -= 1          
+
+#         if n == 0:
+#             print(result + w + cnt)
+#             break
+
+#         if start_truck + queue[0] > L:
+#             if n > 1:             
+#                 result += cnt + w
+#             else:
+#                 result += w
+#             start_truck = 0
+#             cnt = 0
+
+
+# n, w, l = map(int, input().split())
+# trucks = list(map(int, input().split()))
+ 
+# bridge = [0] * w 
+# weight, time = 0, 0
+ 
+# while True:
+#     out = bridge.pop(0)
+#     weight -= out
+ 
+#     if trucks: 
+#         if weight + trucks[0] <= l:
+#             bridge.append(trucks[0])
+#             weight += trucks.pop(0)
+#         else:
+#             bridge.append(0)
+#     time += 1
+
+#     if not bridge:
+#         break    
+# print(time)
+
+
+
+
+# BOJ 15828 Router
+
+import sys
+
+N = int(input())
+queue = []
+max_size = 0
 
 while True:
-    if L > queue[0]:
-        start_truck += queue.popleft()
-        cnt += 1   
-        n -= 1          
+    num = int(sys.stdin.readline())
+    if num == -1:
+        break
+    if N > max_size and num != 0:
+        queue.append(num)
+        max_size += 1
+    if num == 0:
+        queue.pop(0)
+        max_size -= 1
 
-        if n == 0:
-            print(result + w + cnt)
-            break
-
-        if start_truck + queue[0] > L:
-            if n > 1:             
-                result += cnt + w
-            else:
-                result += w
-            start_truck = 0
-            cnt = 0
+if not queue:
+    print('empty')
+else:
+    print(*queue)

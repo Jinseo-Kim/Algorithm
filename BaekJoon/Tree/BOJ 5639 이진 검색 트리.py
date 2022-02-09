@@ -4,14 +4,25 @@
 import sys
 sys.setrecursionlimit(10**6)
 
-def pre_order(tree):
-    # root = tree[0]
 
+def post_order(tree):
     if len(tree) <= 1:
-        return tree[0]
+        return tree
 
-    for i in range(1,len(tree)):
+    for i in range(1, len(tree)):
         if tree[0] < tree[i]:
-            return pre_order(tree[1:i]) + pre_order(tree[i:]) + tree[0]
+            return post_order(tree[1:i]) + post_order(tree[i:]) + [tree[0]]
 
-    return tree
+    return post_order(tree[1:]) + [tree[0]]
+
+
+tree = []
+while True:
+    try:
+        tree.append(int(sys.stdin.readline()))
+    except:
+        break
+
+nums = post_order(tree)
+for i in nums:
+    print(i)

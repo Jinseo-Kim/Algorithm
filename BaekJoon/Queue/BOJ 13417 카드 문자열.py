@@ -7,10 +7,13 @@ for _ in range(int(input())):
     result = deque()
 
     for _ in range(N):
-        card = cards[0]
-        result.append(cards.popleft())
-        if result[0] <= result[-1]:
-            result.appendleft(card)
+        card = cards.popleft()
+        
+        if result:
+            if result[0] >= card:
+                result.appendleft(card)
+            else:
+                result.append(card)
         else:
             result.append(card)
 

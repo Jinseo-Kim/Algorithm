@@ -3,18 +3,15 @@ import sys
 
 for _ in range(int(input())):
     N = int(input())
-    cards = deque(sys.stdin.readline().split())
+    cards = sys.stdin.readline().split()
     result = deque()
+    
+    result.append(cards.pop(0))
 
-    for _ in range(N):
-        card = cards.popleft()
-        
-        if result:
-            if result[0] >= card:
-                result.appendleft(card)
-            else:
-                result.append(card)
+    for i in cards:
+        if result[0] >= i:
+            result.appendleft(i)
         else:
-            result.append(card)
+            result.append(i)
 
     print(''.join(result))

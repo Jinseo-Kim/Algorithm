@@ -38,12 +38,17 @@ while True:
             print(time)
             break
         for i in range(len(apple)):
-            if snake_head[0] * snake_head[1] <= apple[i][-1]:
-                if snake_head[0] == apple[i][0] and snake_head[1] == apple[i][1]:
-                    snake_head[crdnt] += 1
+            if apple[i][-1] > snake_head[0] * snake_head[1]:
+                break
+            if apple[i][-1] == snake_head[0] * snake_head[1]:
+                if (snake_head[0] == apple[i][0]) and (snake_head[1] == apple[i][1]):
+                    snake_head[crdnt] -= 1
+                    for _ in range(i):
+                        apple.append(apple.popleft())
                     apple.popleft()
-                else:
-                    break
+                    
+        snake_head[crdnt] += 1
+        snake_tail[crdnt] += 1
     
     # x나 y에 - 해주는 진영
     if degree > 90:
@@ -51,14 +56,14 @@ while True:
             print(time)
             break
         for i in range(len(apple)):
-            if snake_head[0] * snake_head[1] <= apple[i][-1]:
-                if snake_head[0] == apple[i][0] and snake_head[1] == apple[i][1]:
+            if apple[i][-1] > snake_head[0] * snake_head[1]:
+                break
+            if apple[i][-1] == snake_head[0] * snake_head[1]:
+                if (snake_head[0] == apple[i][0]) and (snake_head[1] == apple[i][1]):
                     snake_head[crdnt] -= 1
+                    for _ in range(i):
+                        apple.append(apple.popleft())
                     apple.popleft()
-                else:
-                    break
-
-                            
-
+    
         snake_head[crdnt] -= 1
         snake_tail[crdnt] -= 1

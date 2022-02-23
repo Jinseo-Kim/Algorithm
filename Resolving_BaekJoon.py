@@ -1,10 +1,3 @@
-
-
-
-
-
-# tree = [i for i in int(sys.stdin.readline())]
-# pre_order(tree)
 # import sys
 
 # class stack:
@@ -134,80 +127,6 @@
 #         cq.display()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # BOJ 1935 후위 표기식2
 # 이 문제 다시 풀어보기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # import sys
@@ -235,11 +154,6 @@
 #             solo = stack[0]
 #             cnt += 1
 # print(format(*stack,".2f"))
-
-
-
-
-
 
 
 # BOJ 1966 프린터 큐

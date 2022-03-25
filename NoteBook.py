@@ -34,7 +34,6 @@ def dfs_recursive(graph, start, visited=[]):
         if node not in visited:
             dfs_recursive(graph, node, visited)
     return visited
-'''
 
 
 graph = dict()
@@ -49,3 +48,15 @@ graph['G'] = ['C']
 graph['H'] = ['C']
 graph['I'] = ['C', 'J']
 graph['J'] = ['I']
+'''
+
+
+def solution(n, computers, result = []):
+    for i in range(n):
+        if computers[i] not in result:
+            result.append(i)
+            solution(n, computers[i], result)
+
+
+n = 3
+computers = [[1,1,0],[1,1,0],[0,0,1]]

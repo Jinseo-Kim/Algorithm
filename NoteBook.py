@@ -50,6 +50,7 @@ graph['I'] = ['C', 'J']
 graph['J'] = ['I']
 '''
 
+# Programmers 네트워크 문제
 # ------------------------------------------------ 정답 코드 - -----------------------------------------------
 # def solution(n, computers):
 #     answer = 0
@@ -74,25 +75,26 @@ graph['J'] = ['I']
 
 
 # ----------------------------------------- 내가 다시 작성 해본 코드 -----------------------------------------
-def solution(n, computers, result = 0):
-    invited = [False for i in range(n)]
+# def solution(n, computers, result = 0):
+#     invited = [False for i in range(n)]
 
-    for com in range(n):
-        if invited[com] == False:
-            dfs(n, computers, invited, com)
-            result += 1
+#     for com in range(n):
+#         if invited[com] == False:
+#             dfs(n, computers, invited, com)
+#             result += 1
 
-    return result
+#     return result
 
-def dfs(n, computers, invited, com):
-    invited[com] = True
-    for i in range(n):
-        if com != i and computers[com][i] == 1:
-            if invited[i] is False:
-                dfs(n, computers, invited, i)
+# def dfs(n, computers, invited, com):
+#     invited[com] = True
+#     for i in range(n):
+#         if com != i and computers[com][i] == 1:
+#             if invited[i] is False:
+#                 dfs(n, computers, invited, i)
 
-print(solution(3, [[1,1,0],[1,1,1],[0,1,1]]))
+# print(solution(3, [[1,1,0],[1,1,1],[0,1,1]]))
 # ------------------------------------------------------------------------------------------------------------
+
 
 
 

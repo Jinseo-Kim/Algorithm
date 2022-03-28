@@ -50,13 +50,66 @@ graph['I'] = ['C', 'J']
 graph['J'] = ['I']
 '''
 
+# ------------------------------------------------ 정답 코드 - -----------------------------------------------
+# def solution(n, computers):
+#     answer = 0
+#     visited = [False for i in range(n)]
+#     for com in range(n):
+#         if visited[com] == False:
+#             DFS(n, computers, com, visited)
+#             answer += 1  # DFS로 최대한 컴퓨터들을 방문하고 빠져나오게 되면 그것이 하나의 네트워크.
+#     return answer
 
-def solution(n, computers, result = []):
+
+# def DFS(n, computers, com, visited):
+#     visited[com] = True
+#     for connect in range(n):
+#         if connect != com and computers[com][connect] == 1:  # 연결된 컴퓨터
+#             if visited[connect] == False:
+#                 DFS(n, computers, connect, visited)
+
+
+# print(solution(3, [[1,1,0],[1,1,1],[0,1,1]]))
+# ------------------------------------------------------------------------------------------------------------
+
+
+# ----------------------------------------- 내가 다시 작성 해본 코드 -----------------------------------------
+def solution(n, computers, result = 0):
+    invited = [False for i in range(n)]
+
+    for com in range(n):
+        if invited[com] == False:
+            dfs(n, computers, invited, com)
+            result += 1
+
+    return result
+
+def dfs(n, computers, invited, com):
+    invited[com] = True
     for i in range(n):
-        if computers[i] not in result:
-            result.append(i)
-            solution(n, computers[i], result)
+        if com != i and computers[com][i] == 1:
+            if invited[i] is False:
+                dfs(n, computers, invited, i)
+
+print(solution(3, [[1,1,0],[1,1,1],[0,1,1]]))
+# ------------------------------------------------------------------------------------------------------------
 
 
-n = 3
-computers = [[1,1,0],[1,1,0],[0,0,1]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -269,13 +269,22 @@
 # print(time)
 
 
-N = int(input())
-result = 1
-bee = 1
+# N = int(input())
+# result = 1
+# bee = 1
+
+# while True:
+#     if bee >= N:
+#         print(result)
+#         break
+#     bee += result * 6
+#     result += 1
+
+
+X = int(input())
+
+line = 0
+max_num = 0
 
 while True:
-    if bee >= N:
-        print(result)
-        break
-    bee += result * 6
-    result += 1
+    pass

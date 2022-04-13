@@ -281,21 +281,58 @@
 #     result += 1
 
 
-X = int(input())
+###################################################################### 2022. 04. 13 ################################################################################
+# X = int(input())
 
-line = 0
-max_num = 0
+# line = 0
+# max_num = 0
 
-while X > max_num:
-    line += 1
-    max_num += line
+# while X > max_num:
+#     line += 1
+#     max_num += line
 
-gap = max_num - X
-if line % 2 == 0:
-    top = line - gap
-    bottom = gap + 1
-else:
-    top = gap + 1
-    bottom = line - gap
+# gap = max_num - X
 
-print(f'{top}/{bottom}')
+# if line % 2 == 0:
+#     top = line - gap
+#     bottom = gap + 1
+# else:
+#     top = gap + 1
+#     bottom = line - gap
+
+# print(f'{top}/{bottom}')
+
+
+# A, B, V = map(int,input().split())
+# result = 0
+
+# day_up = A - B
+
+# if (V - A) % day_up != 0:
+#     result = (V - A) // day_up + 2
+# else:
+#     result = (V - A) // day_up + 1
+
+# print(result)
+
+
+# for _ in range(int(input())):
+#     H, W, N = map(int,input().split())
+
+#     if N % H != 0:
+#         xx = N // H + 1
+#         yy = N % H
+#     else:
+#         xx = N // H
+#         yy = H
+
+#     xx = str(xx)
+#     yy = str(yy)
+
+#     if len(xx) == 1:
+#         xx = '0' + xx
+
+#     print(yy + xx)
+
+
+####################################################################################################################################################################

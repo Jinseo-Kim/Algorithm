@@ -336,3 +336,51 @@
 
 
 ####################################################################################################################################################################
+
+
+###################################################################### 2022. 04. 14 ################################################################################
+# for _ in range(int(input())):
+#     k = int(input())
+#     n = int(input())
+
+#     result = [i for i in range(1,n+1)]
+
+#     for i in range(k):
+#         for j in range(1, n):
+#             result[j] += result[j-1]
+
+#     print(result[n-1])
+
+
+# N = int(input())
+
+# five_kg = N // 5
+# remaining_sugar = N % 5
+
+# while True:
+#     if remaining_sugar % 3 > 0:
+#         if five_kg <= 0:
+#             print(-1)
+#             break
+#         remaining_sugar += 5
+#         five_kg -= 1
+#     else:
+#         five_kg += (remaining_sugar // 3)
+#         print(five_kg)
+#         break
+
+
+# N = int(input())
+# prime_nums = list(map(int,input().split()))
+# result = N
+
+# for num in prime_nums:
+#     for i in range(2,1001):
+#         if num == 1:
+#             result -= 1
+#             break
+#         if num % i == 0 and num != i:
+#             result -= 1
+#             break
+
+# print(result)

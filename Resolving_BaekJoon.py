@@ -554,4 +554,45 @@ for num in nums:
         print(num)
 '''
 
+# 풀긴 했지만 너무 느리다...왤까?
+import sys
 
+nums = [False, False] + [True] * 246950
+
+while True:
+    n = int(sys.stdin.readline())
+    max_num = 2 * n
+    result = 0
+
+    if n == 0:
+        break
+
+    for i in range(2, int(max_num ** 0.5)+1):
+        if nums[i]:
+            for j in range(i * 2, max_num+1, i):
+                nums[j] = False
+
+    for num in nums:
+        if max_num >= num > n:
+            result += 1
+    
+    print(result)
+
+d = [True] * (2 * 123456)
+d[0], d[1] = False, False
+for i in range(2, 2 * 123456):
+    for j in range(2 * i, 2 * 123456, i):
+        d[j] = False
+sosu = [i for i in range(2 * 123456) if d[i] == True]
+
+k = True
+while k:
+    n = int(input())
+    if n == 0:
+        k = False
+        break
+    ans = 0
+    for i in sosu:
+        if n < i <= 2*n:
+            ans += 1
+    print(ans)

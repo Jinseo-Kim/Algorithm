@@ -555,6 +555,7 @@ for num in nums:
 '''
 
 # 풀긴 했지만 너무 느리다...왤까?
+'''
 import sys
 
 nums = [False, False] + [True] * 246950
@@ -577,7 +578,9 @@ while True:
             result += 1
     
     print(result)
+'''
 
+'''
 d = [True] * (2 * 123456)
 d[0], d[1] = False, False
 for i in range(2, 2 * 123456):
@@ -596,3 +599,25 @@ while k:
         if n < i <= 2*n:
             ans += 1
     print(ans)
+'''
+####################################################################################################################################################################
+
+
+###################################################################### 2022. 04. 18 ################################################################################
+prime_num = list(range(10001))
+prime_num[0], prime_num[1] = False, False
+
+while True:
+    for i in range(2, int(10000 ** 0.5)+1):
+        if prime_num[i]:
+            for j in range(i * 2, 10001, i):
+                prime_num[j] = False
+    break
+
+for _ in range(int(input())):
+    n = int(input())
+    nums = [i for i in range(n+1) if i]
+    half = len(nums) // 2
+
+    for i in range(half):
+        pass

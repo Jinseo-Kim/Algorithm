@@ -631,9 +631,8 @@ for _ in range(int(input())):
 
 
 ###################################################################### 2022. 04. 19 ################################################################################
+'''
 x, y, w, h = map(int,input().split())
-gap_x = w - x
-gap_y = h - y
 result = 0
 
 if x > y:
@@ -641,9 +640,31 @@ if x > y:
 else:
     result = x
 
-if gap_x >= gap_y:
-    if gap_y > result:
-        print(result)
-    else:
-        print(gap_y)
+if result >= w - x:
+    result = w - x
+if result >= h - y:
+    result = h - y
 
+print(result)
+'''
+
+
+org_x, org_y = 0, 0
+chg_x, chg_y = 0, 0
+for _ in range(3):
+    x, y = map(int,input().split())
+
+    if org_x == 0:
+        org_x, org_y = x, y
+
+    if org_x != x and chg_x == 0:
+        org_x = x
+        chg_x += 1
+    
+    if org_x != y and chg_y == 0:
+        org_y = y
+        chg_y += 1
+
+print(f'{org_x} {org_y}')
+
+#하ㅏ.....야팔 코딩...

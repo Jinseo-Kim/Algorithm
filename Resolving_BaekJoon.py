@@ -604,6 +604,7 @@ while k:
 
 
 ###################################################################### 2022. 04. 18 ################################################################################
+'''
 prime_num = list(range(10001))
 prime_num[0], prime_num[1] = False, False
 
@@ -616,8 +617,33 @@ while True:
 
 for _ in range(int(input())):
     n = int(input())
-    nums = [i for i in range(n+1) if i]
-    half = len(nums) // 2
+    left = n // 2
+    right = left
 
-    for i in range(half):
-        pass
+    for i in range(left):
+        if prime_num[left] and prime_num[right]:
+            print(f'{prime_num[left]} {prime_num[right]}')
+            break
+        left -= 1
+        right += 1
+'''
+####################################################################################################################################################################
+
+
+###################################################################### 2022. 04. 19 ################################################################################
+x, y, w, h = map(int,input().split())
+gap_x = w - x
+gap_y = h - y
+result = 0
+
+if x > y:
+    result = y
+else:
+    result = x
+
+if gap_x >= gap_y:
+    if gap_y > result:
+        print(result)
+    else:
+        print(gap_y)
+

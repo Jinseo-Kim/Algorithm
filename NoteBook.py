@@ -98,20 +98,11 @@ graph['J'] = ['I']
 
 
 
+r = int(input())
+
+print(f'{r * r * 3.141592653628118:6f}')
+print(f'{r * r * 2:6f}')
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+for _ in range(int(input())):
+    pass

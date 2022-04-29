@@ -738,13 +738,16 @@ for i in Map:
 
 
 ###################################################################### 2022. 04. 28 ################################################################################
-def hanoi(first, second, third, cnt, result):
-    if first:
-        pass
-    if second:
-        pass
-    if third:
-        pass
+# 하노이의 탑은 나중에 풀어보자.... 더 쉬운 문제로 재귀를 익힌 뒤에
+'''
+def hanoi(first, second, third, cnt, result, n):
+    if n-1 in first:
+        block = first.pop()
+        if block == n-1:
+            if second[-1] > block:
+                second.append(block)
+                result.append([1, 2])
+                cnt += 1
 
 n = int(input())
 first = [i for i in range(n,0,-1)]
@@ -760,5 +763,41 @@ else:
     result.append([1, 2])
 cnt += 1
 
-print(f'{first} {second} {third}')
-hanoi(first, second, third, cnt, result)
+hanoi(first, second, third, cnt, result, n)
+'''
+
+'''
+def plus_num(n, start_num):
+    global result
+    if start_num >= n:
+        if start_num == n:
+            result += 1
+        return
+    if start_num < n:
+        plus_num(n, start_num + 1)
+    if start_num < n:
+        plus_num(n, start_num + 2)
+    if start_num < n:
+        plus_num(n, start_num + 3)
+
+    return result
+
+for _ in range(int(input())):
+    n = int(input())
+    result = 0
+    for i in range(1,4):
+        plus_num(n, i)
+    print(result)
+'''
+
+
+N = int(input())
+arr = [1, 2, 4]
+for _ in range(4, 11):
+    arr.append(sum(arr[-3:]))
+for _ in range(N):
+    T = int(input())
+    print(arr[T-1])
+
+
+

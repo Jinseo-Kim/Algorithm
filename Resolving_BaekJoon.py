@@ -799,13 +799,21 @@ for _ in range(N):
     T = int(input())
     print(arr[T-1])
 '''
-def slice_paper(confetti, n, result):
-    for j in range(n):
-        confetti[n * i][:n]
-    pass
+def slice_paper(confetti, result, n, m = 1):
+    for i in range(m):
+        for j in range(n):
+            if 1 in confetti[j][n*i:n*(i+1)]:
+                if 0 in confetti[j][n*i:n*(i+1)]:
+                    slice_paper(confetti, result, n // 2, m * 2)
+                else:
+                    result[0] += 1
+            else:
+                result[1] += 1
+    return result
 
 
 n = int(input())
 confetti = [list(map(int,input().split())) for i in range(n)]
 result = [0, 0]     # 첫번째 인덱스 = white, 두번째 인덱스 = blue
-slice_paper(confetti, n, result)
+print(slice_paper(confetti, result, n))
+print(result)

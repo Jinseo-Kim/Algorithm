@@ -790,7 +790,7 @@ for _ in range(int(input())):
     print(result)
 '''
 
-
+'''
 N = int(input())
 arr = [1, 2, 4]
 for _ in range(4, 11):
@@ -798,6 +798,14 @@ for _ in range(4, 11):
 for _ in range(N):
     T = int(input())
     print(arr[T-1])
+'''
+def slice_paper(confetti, n, result):
+    for j in range(n):
+        confetti[n * i][:n]
+    pass
 
 
-
+n = int(input())
+confetti = [list(map(int,input().split())) for i in range(n)]
+result = [0, 0]     # 첫번째 인덱스 = white, 두번째 인덱스 = blue
+slice_paper(confetti, n, result)

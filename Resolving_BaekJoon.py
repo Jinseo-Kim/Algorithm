@@ -800,18 +800,18 @@ for _ in range(N):
     print(arr[T-1])
 '''
 def slice_paper(confetti, result, n, m = 1):
-    chg = 1
-    # for i in range(m):
-    #     for j in range(n*i,n*(i+1)):
-    #         if 0 in confetti[j][n*i:n*(i+1)]:
-    #             if 1 in confetti[j][n*i:n*(i+1)]:
-    #                 return slice_paper(confetti, result, n // 2, m * 2)
-
     for i in range(m):
         for j in range(n * m):
-            if 0 and 1 in confetti[j][n*i:n*(i+1)]:
-                if n // (j+1) == 1 or 2:
-                    pass    # result + 1
+            if 1 in confetti[j][n*i:n*(i+1)] and 0 in confetti[j][n*i:n*(i+1)]:
+                return slice_paper(confetti, result, n // 2, m * 2)
+
+            if 0 in confetti[j][n*i:n*(i+1)]:
+                result[0] += 1
+            else:
+                result[1] += 1
+                
+    result[0] = result[0] // n
+    result[1] = result[1] // n
 
     return result
 

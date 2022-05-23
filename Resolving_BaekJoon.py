@@ -799,25 +799,36 @@ for _ in range(N):
     T = int(input())
     print(arr[T-1])
 '''
-def slice_paper(confetti, result, n, m = 1):
-    for i in range(m):
-        for j in range(n * m):
-            if 1 in confetti[j][n*i:n*(i+1)] and 0 in confetti[j][n*i:n*(i+1)]:
-                return slice_paper(confetti, result, n // 2, m * 2)
 
-            if 0 in confetti[j][n*i:n*(i+1)]:
-                result[0] += 1
-            else:
-                result[1] += 1
-                
-    result[0] = result[0] // n
-    result[1] = result[1] // n
+########################## 색종이 자르기 - 다 시 풀 어 보기 #########################
+#### 재귀는 역시 잘 모르겠다 ####
+## 해당 풀이는 https://zidarn87.tistory.com/378 를 참고함 ##
+# 놓쳤거나 풀지 못한 원인
+# 1. 이중 for문을 사용할 생각을 못함.
+# 2. 어느정도 답에 근접하였으나 같은 부분에서 풀지 못하고 계속해서 맴도는 바람에 시간이 너무 많이 소요됨. (집중력 저하))
+def slice_confetti(result, n, x = 0, y = 0):
+    check = confetti[x][y]
 
+    for i in range(x, x+n):
+        for j in range(y, y+n):
+            if check != confetti[i][j]:
+                slice_confetti(result, n//2, x, y)
+                slice_confetti(result, n//2, x+n//2, y)
+                slice_confetti(result, n//2, x, y+n//2)
+                slice_confetti(result, n//2, x+n//2, y+n//2)
+                return result
+    
+    if check == 0:
+        result[0] += 1
+    if check == 1:
+        result[1] += 1
+    
     return result
-
+        
 
 n = int(input())
 confetti = [list(map(int,input().split())) for i in range(n)]
-result = [0, 0]     # 첫번째 인덱스 = white, 두번째 인덱스 = blue
-print(slice_paper(confetti, result, n))
-print(result)
+result = [0, 0]
+
+for i in slice_confetti(result, n):
+    print(i)

@@ -1,3 +1,3 @@
 n, k = map(int,input().split())
-for  in range(n):
+for _ in range(n):
     pass

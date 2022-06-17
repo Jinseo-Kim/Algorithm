@@ -94,3 +94,21 @@ graph['J'] = ['I']
 
 # print(solution(3, [[1,1,0],[1,1,1],[0,1,1]]))
 # ------------------------------------------------------------------------------------------------------------
+def solution(scoville, K):
+    scoville.sort(reverse = True)
+    result = 0
+
+    while True:
+        if scoville[-1] >= K:
+            return result
+
+        first = scoville.pop()
+        second = scoville.pop()
+        scoville.append(first + second*2)
+        scoville.sort(reverse = True)
+        result += 1
+
+
+scoville = [1, 2, 3, 9, 10, 12]
+k = 7
+print(solution(scoville, k))

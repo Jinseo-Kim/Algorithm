@@ -94,3 +94,167 @@ graph['J'] = ['I']
 
 # print(solution(3, [[1,1,0],[1,1,1],[0,1,1]]))
 # ------------------------------------------------------------------------------------------------------------
+# from collections import deque
+
+# def solution(participant, completion):
+#     answer = []
+#     participant = deque(sorted(participant))
+#     completion = deque(sorted(completion) + ['0' * (len(participant) - len(completion))])
+
+#     starter = 0
+#     finisher = 0
+
+#     for i in range(len(participant)):
+#         starter = participant.popleft()
+
+#         if finisher == 0:
+#             finisher = completion.popleft()
+
+#         if starter != finisher:
+#             answer.append(starter)
+#         else:
+#             finisher = 0
+        
+#     return answer
+
+
+# participant = ["mislav", "stanko", "mislav", "ana"]
+# completion = ["stanko", "ana", "mislav"]
+# print(solution(participant, completion))
+'''
+def solution(n, lost, reserve):
+    answer = n-len(lost)
+    max_sum = len(reserve)
+    chg = True
+
+    for i in range(len(lost)):
+        for j in range(len(reserve)):
+            if lost[i] == reserve[j]:
+                lost[i] = 0
+                reserve[j] = 0
+                answer += 1
+            if reserve[j] not in lost:
+                if chg and abs(lost[i]-reserve[j]) == 1:
+                    answer += 1
+                    max_sum -= 1
+                    chg = False
+        chg = True
+        
+    if max_sum < 0:
+        answer += max_sum
+
+    return answer
+
+n = 8
+lost = [2,3]
+reserve = [1,2]
+print(solution(n, lost, reserve))
+다시 풀어봐야함 set 방식이 꽤 좋은 방법이 있었음
+''' 
+
+
+# def solution(numbers):
+#     answer = 0
+#     slice_number = [list(str(i)) for i in numbers]
+#     for i in range(len(slice_number)):
+#         pass
+#     return answer
+
+# numbers = [6,10,2]
+# print(solution(numbers))
+
+'''
+def solution(number, k):
+    answer = []
+    for num in number:    
+        if not answer:
+            answer.append(num)
+            continue
+        print(answer)
+        if k > 0:
+            while answer[-1] < num:
+                print(answer)
+                answer.pop()
+                k -= 1
+                if not answer or k <= 0:
+                    break
+
+        answer.append(num)
+    
+    return "".join(answer)
+
+number = "4177252841"
+k = 4
+print(solution(number, k))
+'''
+
+
+# 프로그래머스 그리디
+'''
+def solution(people, tshirts):
+    answer = 0
+    max_size = max(tshirts)
+    in_stock = ['start'] + [0] * max_size
+
+    for i in tshirts:
+        in_stock[i] += 1
+
+    for _ in range(len(people)):
+        human_size = people.pop()
+
+        if max_size >= human_size:
+            for i in range(human_size, max_size+1):
+                if in_stock[i] >= 1:
+                    in_stock[i] -= 1
+                    answer += 1
+                    break
+
+    return answer
+
+people = [1,2,3,4]
+tshirts = [2,3,4,5]
+print(solution(people, tshirts))
+'''
+
+
+from collections import deque
+
+
+def solution(booked, unbooked):
+    answer = []
+    booked = deque(booked)
+    unbooked = deque(unbooked)
+    current_time = ""
+
+    if booked[0][0] >= unbooked[0][0]:
+        current_time = unbooked[0][0]
+    else:
+        current_time = booked[0][0]
+    hh = int(current_time[:2])
+    mm = int(current_time[3:5])
+
+
+    while True:
+        if not booked and not unbooked:
+            break
+
+        if current_time[3:5] >= "60":
+            hh = hh + mm // 60
+            mm = mm % 60
+            current_time = str(hh) + ":" + str(mm)
+
+        if booked[0][0] <= unbooked[0][0]:
+            answer.append(booked[0][1])
+            booked.popleft()
+        else:
+            answer.append(unbooked[0][1])
+            unbooked.popleft()
+
+        current_time = str(hh) + ":" + str(mm + 10)
+    
+    return answer
+
+booked = [["09:10", "lee"]]
+unbooked = [["09:00", "kim"],["09:05", "bae"]]
+
+print(solution(booked, unbooked))

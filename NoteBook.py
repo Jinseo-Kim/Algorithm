@@ -216,7 +216,7 @@ tshirts = [2,3,4,5]
 print(solution(people, tshirts))
 '''
 
-
+'''
 from collections import deque
 
 
@@ -258,15 +258,24 @@ booked = [["09:10", "lee"]]
 unbooked = [["09:00", "kim"],["09:05", "bae"]]
 
 print(solution(booked, unbooked))
-
-<<<<<<< HEAD
-scoville = [1, 2, 3, 9, 10, 12]
-k = 7
-print(solution(scoville, k))
+'''
 
 
 def solution(scoville, K):
-    answer = 0
-    return answer
-=======
->>>>>>> b94decc95beb3a1eb829f80e92810e05286783d9
+     scoville.sort(reverse = True)
+     result = 0
+
+     while True:
+         if scoville[-1] >= K:
+             return result
+
+         first = scoville.pop()
+         second = scoville.pop()
+         scoville.append(first + second*2)
+         scoville.sort(reverse = True)
+         result += 1
+
+
+ scoville = [1, 2, 3, 9, 10, 12]
+ k = 7
+ print(solution(scoville, k))

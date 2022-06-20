@@ -94,7 +94,6 @@ graph['J'] = ['I']
 
 # print(solution(3, [[1,1,0],[1,1,1],[0,1,1]]))
 # ------------------------------------------------------------------------------------------------------------
-<<<<<<< HEAD
 # from collections import deque
 
 # def solution(participant, completion):
@@ -259,23 +258,4 @@ booked = [["09:10", "lee"]]
 unbooked = [["09:00", "kim"],["09:05", "bae"]]
 
 print(solution(booked, unbooked))
-=======
-def solution(scoville, K):
-    scoville.sort(reverse = True)
-    result = 0
 
-    while True:
-        if scoville[-1] >= K:
-            return result
-
-        first = scoville.pop()
-        second = scoville.pop()
-        scoville.append(first + second*2)
-        scoville.sort(reverse = True)
-        result += 1
-
-
-scoville = [1, 2, 3, 9, 10, 12]
-k = 7
-print(solution(scoville, k))
->>>>>>> 23e52b204bc41ce75fe4cd20d69e9010b90fe174

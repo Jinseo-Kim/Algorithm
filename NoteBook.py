@@ -261,21 +261,38 @@ print(solution(booked, unbooked))
 '''
 
 
+import heapq
+'''
 def solution(scoville, K):
-     scoville.sort(reverse = True)
-     result = 0
+    scoville.sort(reverse = True)
+    result = 0
 
-     while True:
-         if scoville[-1] >= K:
-             return result
+    while True:
+        if scoville[-1] >= K:
+            return result
 
-         first = scoville.pop()
-         second = scoville.pop()
-         scoville.append(first + second*2)
-         scoville.sort(reverse = True)
-         result += 1
+        first = scoville.pop()
+        second = scoville.pop()
+        scoville.append(first + second*2)
+        scoville.sort(reverse = True)
+        result += 1
+'''
+
+def solution(scoville, K, cnt = 0):
+    heapq.heapify(scoville)
+    root_node = heapq.heappop(scoville)
+    second_node = heapq.heappop(scoville)
+
+    if root_node >= K:
+        return root_node
+    cnt += 1
+
+    if root_node + second_node * 2 >= K:
+        return cnt
+    else:
+        heapq.heappush(scoville, root_node + second_node * 2)
 
 
- scoville = [1, 2, 3, 9, 10, 12]
- k = 7
- print(solution(scoville, k))
+scoville = [1, 2, 3, 9, 10, 12]
+k = 7
+print(solution(scoville, k))

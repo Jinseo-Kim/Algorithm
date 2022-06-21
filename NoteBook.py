@@ -278,21 +278,67 @@ def solution(scoville, K):
         result += 1
 '''
 
+'''
 def solution(scoville, K, cnt = 0):
     heapq.heapify(scoville)
-    root_node = heapq.heappop(scoville)
-    second_node = heapq.heappop(scoville)
 
-    if root_node >= K:
-        return root_node
-    cnt += 1
+    while True:
+        root_node = heapq.heappop(scoville)
+    
+        if root_node >= K:
+            break
+        elif len(scoville) == 0:
+            cnt = -1
+            break
 
-    if root_node + second_node * 2 >= K:
-        return cnt
-    else:
+        second_node = heapq.heappop(scoville)
         heapq.heappush(scoville, root_node + second_node * 2)
+        cnt += 1
+
+    return cnt
 
 
 scoville = [1, 2, 3, 9, 10, 12]
 k = 7
 print(solution(scoville, k))
+'''
+
+from collections import deque
+
+def dfs(graph, start_node, visited = []):
+    visited.append(start_node)
+
+    for node in graph[start_node]:
+        if node not in visited:
+            dfs(graph, node, visited)
+    
+    return visited
+
+
+def bfs(graph, start_node):
+    need_visited = deque()
+    visited = []
+    need_visited.append(start_node)
+
+    while need_visited:
+        node = need_visited.popleft()
+        if node not in visited:
+            visited.append(node)
+            need_visited.extend(graph[node])
+
+    return visited
+
+
+graph = dict()
+
+graph['A'] = ['B', 'C']
+graph['B'] = ['A', 'D']
+graph['C'] = ['A', 'G', 'H', 'I']
+graph['D'] = ['B', 'E', 'F']
+graph['E'] = ['D']
+graph['F'] = ['D']
+graph['G'] = ['C']
+graph['H'] = ['C']
+graph['I'] = ['C', 'J']
+graph['J'] = ['I']
+print(bfs(graph, start_node = 'A'))

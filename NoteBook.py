@@ -296,8 +296,75 @@ def solution(scoville, K):
 # print(solution(scoville, k))
 
 
-# 선택 정렬
 '''
+def solution(scoville, K, cnt = 0):
+    heapq.heapify(scoville)
+
+    while True:
+        root_node = heapq.heappop(scoville)
+    
+        if root_node >= K:
+            break
+        elif len(scoville) == 0:
+            cnt = -1
+            break
+
+        second_node = heapq.heappop(scoville)
+        heapq.heappush(scoville, root_node + second_node * 2)
+        cnt += 1
+
+    return cnt
+
+scoville = [1, 2, 3, 9, 10, 12]
+k = 7
+print(solution(scoville, k))
+'''
+
+
+'''
+from collections import deque
+
+def dfs(graph, start_node, visited = []):
+    visited.append(start_node)
+
+    for node in graph[start_node]:
+        if node not in visited:
+            dfs(graph, node, visited)
+    
+    return visited
+
+
+def bfs(graph, start_node):
+    need_visited = deque()
+    visited = []
+    need_visited.append(start_node)
+
+    while need_visited:
+        node = need_visited.popleft()
+        if node not in visited:
+            visited.append(node)
+            need_visited.extend(graph[node])
+
+    return visited
+
+
+graph = dict()
+
+graph['A'] = ['B', 'C']
+graph['B'] = ['A', 'D']
+graph['C'] = ['A', 'G', 'H', 'I']
+graph['D'] = ['B', 'E', 'F']
+graph['E'] = ['D']
+graph['F'] = ['D']
+graph['G'] = ['C']
+graph['H'] = ['C']
+graph['I'] = ['C', 'J']
+graph['J'] = ['I']
+print(bfs(graph, start_node = 'A'))
+
+'''
+
+# 선택 정렬
 def selection_sort(array):
     for i in range(len(array)):
         minimum = i
@@ -310,9 +377,9 @@ def selection_sort(array):
 
     return print(array)
 
-array = [7,9,5,1,2,4,3,6,8]
+
+array = [7, 9, 5, 1, 2, 4, 3, 6, 8]
 selection_sort(array)
-'''
 
 # 삽입 정렬
 

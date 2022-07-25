@@ -260,8 +260,6 @@ unbooked = [["09:00", "kim"],["09:05", "bae"]]
 print(solution(booked, unbooked))
 '''
 
-
-import heapq
 '''
 def solution(scoville, K):
     scoville.sort(reverse = True)
@@ -278,21 +276,79 @@ def solution(scoville, K):
         result += 1
 '''
 
-def solution(scoville, K, cnt = 0):
-    heapq.heapify(scoville)
-    root_node = heapq.heappop(scoville)
-    second_node = heapq.heappop(scoville)
+# def solution(scoville, K, cnt = 0):
+#     heapq.heapify(scoville)
+#     root_node = heapq.heappop(scoville)
+#     second_node = heapq.heappop(scoville)
 
-    if root_node >= K:
-        return root_node
-    cnt += 1
+#     if root_node >= K:
+#         return root_node
+#     cnt += 1
 
-    if root_node + second_node * 2 >= K:
-        return cnt
-    else:
-        heapq.heappush(scoville, root_node + second_node * 2)
+#     if root_node + second_node * 2 >= K:
+#         return cnt
+#     else:
+#         heapq.heappush(scoville, root_node + second_node * 2)
 
 
-scoville = [1, 2, 3, 9, 10, 12]
-k = 7
-print(solution(scoville, k))
+# scoville = [1, 2, 3, 9, 10, 12]
+# k = 7
+# print(solution(scoville, k))
+
+
+# 선택 정렬
+'''
+def selection_sort(array):
+    for i in range(len(array)):
+        minimum = i
+        for j in range(i+1, len(array)):
+            if array[minimum] > array[j]:
+                minimum = j
+
+        if minimum != i:
+            array[i], array[minimum] = array[minimum], array[i]
+
+    return print(array)
+
+array = [7,9,5,1,2,4,3,6,8]
+selection_sort(array)
+'''
+
+# 삽입 정렬
+
+# def insertion_sort(array):
+#     for change_data in range(1, len(array)):
+#         value = array.pop(change_data)
+
+#         for j in range(change_data-1, -1, -1):
+#             if array[j] < value:
+#                 array.insert(j+1, value)
+#                 break
+#             elif j == 0:
+#                 array.insert(0, value)
+#                 break
+
+#     return print(array)
+
+def insertion_sort(array):
+    for i in range(1, len(array)):
+        for j in range(i, 0, -1):
+            if array[j-1] > array[j]:
+                array[j-1], array[j] = array[j], array[j-1]
+    
+    return print(array)
+
+array = [7,9,5,1,2,4,3,6,8]
+insertion_sort(array)
+
+
+
+# def insertion_sort(arr):
+#     for end in range(1, len(arr)):
+#         for i in range(end, 0, -1):
+#             if arr[i - 1] > arr[i]:
+#                 arr[i - 1], arr[i] = arr[i], arr[i - 1]
+#     return arr
+
+# arr = [7,9,5,1,2,4,3,6,8]
+# print(insertion_sort(arr))

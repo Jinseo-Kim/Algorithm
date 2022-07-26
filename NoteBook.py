@@ -439,3 +439,23 @@ def insertion_sort(array):
 array = [7,9,5,1,2,4,3,6,8]
 insertion_sort(array)
 '''
+
+
+# 버블 정렬
+'''
+def bubble_sort(array):
+    for target in range(len(array), 0, -1):
+        for j in range(1,target):
+            if array[j-1] > array[j]:
+                array[j-1], array[j] = array[j], array[j-1]
+        print(array)
+
+    return array
+
+
+array = [7,9,5,1,2,4,3,6,8] # test 1
+array = [9,7,8,6,3,4,2,5,1] # test 2
+print(bubble_sort(array))
+'''
+
+# 퀵 정렬

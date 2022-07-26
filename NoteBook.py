@@ -365,6 +365,10 @@ print(bfs(graph, start_node = 'A'))
 '''
 
 # 선택 정렬
+# 선택 정렬의 전체적인 알고리즘은 앞에서부터 정방향 순환하며 최소값과 현재값의 위치를 변경시켜주는 방식으로 짜여져있음.
+# 해당 알고리즘은 정방향으로 진행되며 정렬이 이뤄지기 떄문에 정렬이 진행됨에 따라 비교하려는 배열의 길이가 짧아짐.
+# 최솟값을 찾는 방법으로 min의 내장 함수를 이용할 수도 있으나 굳이 내장 함수를 사용하지 않고, 값 비교만을 통해 동작하는 코드를 작성함.
+'''
 def selection_sort(array):
     for i in range(len(array)):
         minimum = i
@@ -380,23 +384,50 @@ def selection_sort(array):
 
 array = [7, 9, 5, 1, 2, 4, 3, 6, 8]
 selection_sort(array)
+'''
+
 
 # 삽입 정렬
 
-# def insertion_sort(array):
-#     for change_data in range(1, len(array)):
-#         value = array.pop(change_data)
+# 일차적 단순 구현 insert, pop 사용
+# pop을 이용해 데이터를 빼내고 그 앞에서 해당 데이터보다 작다면 해당 위치의 뒤에 삽입
+'''
+def insertion_sort(array):
+    for change_data in range(1, len(array)):
+        value = array.pop(change_data)
 
-#         for j in range(change_data-1, -1, -1):
-#             if array[j] < value:
-#                 array.insert(j+1, value)
-#                 break
-#             elif j == 0:
-#                 array.insert(0, value)
-#                 break
+        for j in range(change_data-1, -1, -1):
+            if array[j] < value:
+                array.insert(j+1, value)
+                break
+            elif j == 0:
+                array.insert(0, value)
+                break
 
-#     return print(array)
+    return print(array)
+'''
 
+
+# 구현 후 인터넷 검색 및 개선 코드
+'''
+def insertion_sort(arr):
+    for end in range(1, len(arr)):
+        for i in range(end, 0, -1):
+            if arr[i - 1] > arr[i]:
+                arr[i - 1], arr[i] = arr[i], arr[i - 1]
+    return arr
+
+ arr = [7,9,5,1,2,4,3,6,8]
+ print(insertion_sort(arr))
+ '''
+
+
+# 개선 코드를 따라서 작성
+# 이전 인덱스의 값 vs 비교 위치의 값의 비교로 해당 값보다 크다면 swap을 통해 자리 변경. 거듭하여 j의 값이 0이 될 떄까지 반복. 0이면 종료
+# 중요 키포인트는 삽입 정렬에선 거듭할수록 위치를 찾으려는 현재값의 인덱스로부터 이전 인덱스의 값들은 모두 정렬이 되어있다는 점.
+# ex) 75241 -> 57241 -> 25741 -> 24571 -> 12457 인덱스의 진행 순서는 1, 2, 3, 4로 인덱스 3을 기준으로 이전 인덱스 값의 정렬을 보면 4를 기준으로 2,5,7의 수는 이미 정렬이 되어 있음.
+# 이는 특정 인덱스로부터 삽입 정렬이 진행되기 전 특정 인덱스의 값은 정렬되지 않았으나 이전에 진행된 삽입 정렬의 대상 값들은 이미 정렬이 완료되었음을 확인할 수 있음.
+'''
 def insertion_sort(array):
     for i in range(1, len(array)):
         for j in range(i, 0, -1):
@@ -407,15 +438,4 @@ def insertion_sort(array):
 
 array = [7,9,5,1,2,4,3,6,8]
 insertion_sort(array)
-
-
-
-# def insertion_sort(arr):
-#     for end in range(1, len(arr)):
-#         for i in range(end, 0, -1):
-#             if arr[i - 1] > arr[i]:
-#                 arr[i - 1], arr[i] = arr[i], arr[i - 1]
-#     return arr
-
-# arr = [7,9,5,1,2,4,3,6,8]
-# print(insertion_sort(arr))
+'''

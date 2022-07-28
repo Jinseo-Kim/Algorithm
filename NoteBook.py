@@ -460,21 +460,21 @@ print(bubble_sort(array))
 
 # 퀵 정렬
 def quick_sort(array):
-    if not array:
-        return
-
     left, right = [], []
     pivot = array[len(array)//2]
 
     for i in array:
-        if pivot > i:
+        if i < pivot:
             left.append(i)
         else:
             right.append(i)
     
-    quick_sort(left)
-    quick_sort(right)
-    return left + [pivot] + right
+    if left:
+        quick_sort(left) # [1]
+    if right: # [7,9,5,4,3,6,8] 1. [3] + [4] + right 2. [] + [5] + [7,9,6,8] 3. [] + [6] + [7,9,8] 4. [7,8] + [9]
+        quick_sort(right) 
+
+    return left + [pivot] + right # [1] + [2] + 
 
 
 array = [7,9,5,1,2,4,3,6,8] # test 1

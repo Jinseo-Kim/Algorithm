@@ -471,7 +471,7 @@ def quick_sort(array):
     
     if left:
         quick_sort(left) # [1]
-    if right: # [7,9,5,4,3,6,8] 1. [3] + [4] + right 2. [] + [5] + [7,9,6,8] 3. [] + [6] + [7,9,8] 4. [7,8] + [9]
+    if right: # [7,9,5,4,3,6,8] 1. [3] + [4] + right 2. [] + [5] + [7,9,6,8] 3. [] + [6] + [7,9,8] 4. [7,8] + [9] + []
         quick_sort(right) 
 
     return left + [pivot] + right # [1] + [2] + 

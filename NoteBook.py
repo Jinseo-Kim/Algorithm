@@ -477,8 +477,8 @@ def quick_sort(array):
         # [7] + [8] + []
         right = quick_sort(right) 
 
-    return left + [pivot] + right # [1] + [2] + 
+    return left + same + right # [1] + [2] + 
 
 
-array = [7,9,5,1,2,4,3,6,8] # test 1
+array = [7,9,5,1,2,4,3,6,8,2,3] # test 1
 print(quick_sort(array))

@@ -459,6 +459,7 @@ print(bubble_sort(array))
 '''
 
 # 퀵 정렬
+'''
 def quick_sort(array):
     same, left, right = [], [], []
     pivot = array[len(array)//2]
@@ -482,3 +483,27 @@ def quick_sort(array):
 
 array = [7,9,5,1,2,4,3,6,8,2,3] # test 1
 print(quick_sort(array))
+'''
+
+
+
+def solution(id_list, report,k):
+    suspension_count = [0 * len(id_list)]
+
+    id_dict = dict()
+    for id in id_list:
+        id_dict[id] = []
+    
+    for re in report:
+        from_user, to_user = map(str, re.split())
+        id_dict[from_user].append(to_user)
+    
+    
+
+
+    return id_dict
+
+id_list = ['muzi', 'prodo', 'apeach', 'neo']
+report = ['muzi prodo', 'prodo apeach', 'neo muzi', 'neo prodo']
+k = 2
+print(solution(id_list, report, k))

@@ -50,6 +50,7 @@ graph['I'] = ['C', 'J']
 graph['J'] = ['I']
 '''
 
+
 # Programmers 네트워크 문제
 # ------------------------------------------------ 정답 코드 - -----------------------------------------------
 # def solution(n, computers):
@@ -487,23 +488,48 @@ print(quick_sort(array))
 
 
 
-def solution(id_list, report,k):
-    suspension_count = [0 * len(id_list)]
-
+def solution(id_list, report, k):
     id_dict = dict()
+    suspension_count = dict()
     for id in id_list:
-        id_dict[id] = []
+        id_dict[id] = set()
+        suspension_count[id] = 0
     
     for re in report:
         from_user, to_user = map(str, re.split())
-        id_dict[from_user].append(to_user)
+        id_dict[from_user].add(to_user)
     
-    
+    id_dict_values = id_dict.values()
+
+    for bad_users in id_dict_values:
+        for bad_user in bad_users:
+            suspension_count[bad_user] += 1
+        
+    mail_list = [0 for _ in range(len(id_list))]
+    count = 0
+    for send_mail in id_dict_values:
+        for user in send_mail:
+            if suspension_count[user] >= k:
+                mail_list[count] += 1
+        count += 1
+    return mail_list
 
 
-    return id_dict
-
-id_list = ['muzi', 'prodo', 'apeach', 'neo']
-report = ['muzi prodo', 'prodo apeach', 'neo muzi', 'neo prodo']
+id_list = ["muzi", "frodo", "apeach", "neo"]
+report = ["muzi frodo", "apeach frodo", "frodo neo", "muzi neo", "apeach muzi"]
 k = 2
 print(solution(id_list, report, k))
+
+
+# def solution(seoul):
+#     answer = 0
+#     for i in range(len(seoul)):
+#         if seoul[i] == 'Kim':
+#             answer = i
+#             break
+
+#     return '김서방은 {answer}에 있다'
+
+
+# seoul = ["Jane", "Kim"]
+# print(solution(seoul))

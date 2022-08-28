@@ -1,6 +1,5 @@
 # list를 활용한 dfs(stack 및 pop)
 # 핵심
-# 1. while문을 통한 계속된 반복과 종료 조건으로 방문해야할 노드가 없을 때까지 도는 것을 원칙으로 함.
 # 2. 맨 끝에 추가된 노드를 pop함으로써 계속하여 맨 끝으로 이동하도록 함. (주의! graph의 데이터는 모두 오름차순으로 정렬되어 있어야 함.)
 # 3. 현재 노드가 끝이라는 걸 아는 조건으로는 17번째 열에 해당하며, 이미 방문한 노드가 들어있는 리스트에 현재 방문하고자 하는
 #    노드가 있는 지 파악하고 있다면 방문해야할 리스트를 계속 pop하며 최대한 깊이 들어가는 것을 목표로 탐색함.
@@ -487,7 +486,7 @@ print(quick_sort(array))
 '''
 
 
-
+'''
 def solution(id_list, report, k):
     id_dict = dict()
     suspension_count = dict()
@@ -519,6 +518,7 @@ id_list = ["muzi", "frodo", "apeach", "neo"]
 report = ["muzi frodo", "apeach frodo", "frodo neo", "muzi neo", "apeach muzi"]
 k = 2
 print(solution(id_list, report, k))
+'''
 
 
 # def solution(seoul):
@@ -533,3 +533,53 @@ print(solution(id_list, report, k))
 
 # seoul = ["Jane", "Kim"]
 # print(solution(seoul))
+
+
+# dfs 수정 (딕셔너리 자료구조 x)
+
+def dfs(start_node, input_nodes, checked_list, result = []):
+    result.append(start_node)
+    checked_list[start_node] = 1
+
+    search_nodes = input_nodes[start_node]
+
+    for node in search_nodes:
+        if checked_list[node] != 1:
+            dfs(node, input_nodes, checked_list, result)
+    
+    return [result, checked_list]
+
+
+
+# start_node = 1
+# input_nodes = [[1,3], [0,4,2], [1,4], [0,4], [1,3]]
+# checked_list = len(input_nodes) * [0]
+# print(dfs(start_node, input_nodes, checked_list))
+
+
+from collections import deque
+
+# bfs 수정(딕셔너리 자료구조 x)
+def bfs(start_node, input_nodes, checked_list):
+    queue = deque(input_nodes[start_node])
+    result = [start_node]
+    checked_list[start_node] = 1
+
+    while queue:
+        start_node = queue.popleft()
+        if checked_list[start_node] != 1:
+            result.append(start_node)
+            checked_list[start_node] = 1
+
+            queue.extend(input_nodes[start_node])
+
+    return [result, checked_list, start_node]
+
+
+
+start_node = 0
+input_nodes = [[1,3], [0,4,2], [1,4], [0,4], [1,3]]
+checked_list = len(input_nodes) * [0]
+
+print(bfs(start_node, input_nodes, checked_list[:]))
+print(dfs(start_node, input_nodes, checked_list))

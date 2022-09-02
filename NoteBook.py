@@ -625,8 +625,9 @@ for edge in edge_list:
     graph[formatting[0]].append(formatting[1])
     graph[formatting[1]].append(formatting[0])
 
+for node_num in range(1,n+1):
+    graph[node_num] = sorted(graph[node_num])
 
-print(graph)
 print(*dfs(v, graph, visited_node[:]))
 print(*bfs(v, graph, visited_node[:]))
 

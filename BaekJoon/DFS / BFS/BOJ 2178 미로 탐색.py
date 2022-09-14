@@ -4,6 +4,7 @@ import sys
 
 def bfs(n, m, maze, count = 0):
     queue = deque([[1,1]])
+    maze[1][1] = '2'
     move_y, move_x = [-1,1,0,0], [0,0,-1,1]
     while queue:
         count += 1
@@ -11,7 +12,6 @@ def bfs(n, m, maze, count = 0):
             coordinate = queue.popleft()
             if coordinate[0] == n and coordinate[1] == m:
                 return count
-            maze[coordinate[0]][coordinate[1]] = '2'
 
             for direction in range(4):
                 next_y = coordinate[0] + move_y[direction]

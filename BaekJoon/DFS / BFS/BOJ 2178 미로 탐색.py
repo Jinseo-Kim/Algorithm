@@ -1,6 +1,4 @@
 from collections import deque
-import sys
-
 
 def bfs(n, m, maze, count = 0):
     queue = deque([[1,1]])

@@ -6,11 +6,11 @@ def bfs(m, n, cabbage_patch, cabbages, count = 0):
     move_x, move_y = [-1, 1, 0, 0], [0, 0, -1, 1]
 
     for cabbage in range(len(cabbages)):
-        queue.append(cabbages[cabbage])
-        cab_y, cab_x = queue[0]
+        cab_y, cab_x = cabbages[cabbage]
 
         if cabbage_patch[cab_y][cab_x] == 1:
             cabbage_patch[cab_y][cab_x] = 2
+            queue.append([cab_y, cab_x])
             count += 1
 
             while queue:        #사실상 bfs
@@ -23,7 +23,12 @@ def bfs(m, n, cabbage_patch, cabbages, count = 0):
                             cabbage_patch[next_y][next_x] = 2
                             queue.append([next_y, next_x])
 
-for _ in range(input()):
+    return count
+
+
+result = []
+T = int(input())
+for _ in range(T):
     m, n, k = map(int,input().split())
     cabbage_patch = [[0]*m for _ in range(n)]
     cabbages = []
@@ -31,3 +36,8 @@ for _ in range(input()):
         x, y = map(int,input().split())
         cabbage_patch[y][x] = 1
         cabbages.append([y, x])
+
+    result.append(bfs(m, n, cabbage_patch, cabbages))
+
+for i in range(T):
+    print(result[i])

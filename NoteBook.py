@@ -934,6 +934,7 @@ print(d[x], d[:x+1])
 # 이전 최대값의 인덱스와 값을 가지고 있는 배열를 만든다. (ex. [0,7])
 # 인접한 인덱스인 경우 더하지 않는다.
 # 
+'''
 n = int(input())
 
 array = list(map(int, input().split()))
@@ -948,3 +949,24 @@ for i in range(2, n):
     print(d[:n+1])
 print(d[n-1])
 # 현재 배열 공간 + 2칸 전의 배열 공간의 값보다 이전 배열 공간의 값이 더 크다면 현재 공간도 그 값을 넣겠다.
+
+'''
+
+for _ in range(int(input())):
+    n, m = map(int,input().split())
+    mine = list(map(int,input().split()))
+    
+    for i in range(m):
+        max = 0
+        idx = []
+        for j in range(n):
+            if max < mine[j][i]:
+                max = mine[j][i]
+                idx = [j, i]
+        if 0 <= idx[0]-1 < n and 0 <= idx[1]+1 < n:
+            mine[idx[0-1]][idx[1+1]] += max
+        if 0 <= idx[1]+1 < n:
+            mine[idx[0]][idx[1+1]] += max
+        if 0 <= idx[0]+1 < n and 0 <= idx[1]+1 < n:
+            mine[idx[0+1]][idx[1+1]] += max
+    print(mine)    

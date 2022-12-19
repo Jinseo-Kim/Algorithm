@@ -951,7 +951,7 @@ print(d[n-1])
 # 현재 배열 공간 + 2칸 전의 배열 공간의 값보다 이전 배열 공간의 값이 더 크다면 현재 공간도 그 값을 넣겠다.
 
 '''
-
+'''
 for _ in range(int(input())):
     n, m = map(int,input().split())
     mine = list(map(int,input().split()))
@@ -970,3 +970,35 @@ for _ in range(int(input())):
         if 0 <= idx[0]+1 < n and 0 <= idx[1]+1 < n:
             mine[idx[0+1]][idx[1+1]] += max
     print(mine)    
+'''
+
+for _ in range(int(input())):
+    n, m = map(int,input().split())
+    gold_mine = list(map(int,input().split()))
+    dp_table = []
+
+    for i in range(n):
+        dp_table.append(gold_mine[i*m:(i+1)*m])
+    
+    max = 0
+    idx = (0, 0)
+
+    for i in range(m):
+        for j in range(n):
+            if max < dp_table[j][i]:
+                max = dp_table[j][i]
+                idx = (j, i)
+        
+        if i+1 == m:
+            break
+
+        if 0 <= idx[0]-1 < n and 0 <= idx[1]+1 < m:
+            dp_table[idx[0]-1][idx[1]+1] += max
+
+        if 0 <= idx[1]+1 < m:
+            dp_table[idx[0]][idx[1]+1] += max
+        
+        if 0 <= idx[0]+1 < n and 0 <= idx[1]+1 < m:
+            dp_table[idx[0]+1][idx[1]+1] += max
+
+print(max)

@@ -972,6 +972,8 @@ for _ in range(int(input())):
     print(mine)    
 '''
 
+# 금광 문제
+'''
 for _ in range(int(input())):
     n, m = map(int,input().split())
     gold_mine = list(map(int,input().split()))
@@ -1002,3 +1004,24 @@ for _ in range(int(input())):
             dp_table[idx[0]+1][idx[1]+1] += max
 
 print(max)
+'''
+
+
+
+# 병사 배치하기 문제
+# LIS를 통한 문제풀이
+# LIS 설명 : https://cocoon1787.tistory.com/713
+
+n = int(input())
+array = list(map(int, input().split()))
+array.reverse()
+
+dp = [1] * n
+
+for i in range(1, n):
+    for j in range(0, i):
+        if array[j] < array[i]:
+            dp[i] = max(dp[i], dp[j]+1)
+
+print(dp)
+print(n - max(dp))

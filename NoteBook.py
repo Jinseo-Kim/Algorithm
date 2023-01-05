@@ -641,7 +641,7 @@ class Solution:
 test = Solution()
 print(test.twoPointer([1,2,3,4,5,6,5,4,3,2,1],9))
 '''
-
+'''
 def isBadVersion(bad):
     if bad == 4:
         return False
@@ -659,3 +659,440 @@ class Solution:
 
 test = Solution()
 print(test.firstBadVersion(5))
+'''
+
+'''def solution(s):
+    s = s.lower()
+    str_p = 0
+    str_y = 0
+    for i in s:
+        if i == 'p':
+            str_p += 1
+        if i == 'y':
+            str_y += 1
+
+    if str_p == str_y or (str_p == 0 and str_y == 0):
+        return True
+    return False
+'''
+'''
+def solution(d, budget):
+    d.sort()
+    print(d)
+    length = len(d)
+    for i in range(length):
+        budget -= d[i]
+        if budget < 0:
+            return i
+    return length
+
+d = [1, 3, 2, 5, 4]
+budget = 9
+print(solution(d, budget))
+'''
+'''
+def solution(n, words):
+    answer = []
+    table = dict()
+    
+    for i in range(len(words)):
+        if i == 0:
+            table[words[i][0]] = []
+        if i != 0:
+            if words[i-1][-1] == words[i][0]:
+                table[words[i][0]] = []
+            else:
+                if (i+1) % n == 0:
+                    return [n, (i+1)//n+1]
+                else:
+                    return [(i+1)%n, (i+1)//n+1]
+
+    for i in range(len(words)):
+        if table.get(words[i][0]) == []:
+            table[words[i][0]].append(words[i])
+
+        elif table.get(words[i][0]) and table.get(words[i][0]) == [words[i]]:
+            if (i+1) % n == 0:
+                return [n, (i+1)//n]
+            else:
+                return [(i+1) % n, (i+1)//n]
+        
+        
+        print(table)
+        
+
+
+words = ["tank", "kick", "know", "wheel",
+         "land", "dream", "mother", "robot", "tank"]
+n = 3
+print(solution(n, words))
+'''
+'''
+def gen_combinations(arr, n):
+    result = []
+
+    if n == 0:
+        return [[]]
+
+    for i in range(0, len(arr)):
+        elem = arr[i]
+        rest_arr = arr[i + 1:]
+        for C in gen_combinations(rest_arr, n-1):
+            result.append([elem]+C)
+
+    return result
+
+print(gen_combinations([0,1,2,3],3))
+'''
+
+# def gen_permutations(arr, n):
+#     result = []
+
+#     if n == 0:
+#         return [[]]
+
+#     for i, elem in enumerate(arr):
+#         for P in gen_permutations(arr[:i] + arr[i+1:], n-1):
+#             result += [[elem]+P]
+
+#     return result
+
+
+# arr = [0, 1, 2, 3]
+
+# print(gen_permutations(arr, 2))
+
+# 몇 없는 해쉬테이블 사용 코드
+# 대부분 Counter를 이용한 풀이를 함.
+'''
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+
+        hashmap = {}
+
+        # build a hashmap and save count of each char from the string s
+        for c in s:
+            hashmap[c] = hashmap.get(c, 0) + 1
+
+        # iterate over t string and reduce count if the char found in hashmap
+        for c in t:
+            if c in hashmap:
+                hashmap[c] -= 1
+            else:
+                return False
+
+        # if the anagram is valid the count of each char in the hashmap is 0
+        return all(value == 0 for value in hashmap.values())
+
+'''
+'''
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        s = s.lower()
+        start, end = 0, len(s)-1
+
+        while end > start:
+            if not s[start].isalnum():
+                start += 1
+                continue
+            if not s[end].isalnum():
+                end -= 1
+                continue
+            
+            if s[start] != s[end]:
+                return False
+
+            start += 1
+            end -= 1
+
+        return True
+
+result = Solution()
+print(result.isPalindrome("A man, a plan, a canal: Panama"))
+'''
+'''
+class Solution:
+    def twoPointer(self, arr: list[int], target: int) -> int:
+        arr_length = len(arr)-1
+        left, right = 0, 0
+        count = 0
+
+        while arr_length != left:
+            # print(left, right)
+            # if left == 0 and right == 0:
+            #     right += 1
+            
+            if sum(arr[left:right]) >= target:
+                print(left, right)
+                left += 1
+                count += 1
+            if sum(arr[left:right]) < target:
+                if right == arr_length:
+                    left += 1
+                else:
+                    right += 1
+
+        return count
+
+test = Solution()
+print(test.twoPointer([1,2,3,2,4,5,3,2], 6))
+'''
+
+'''
+class Solution:
+    def search(self, nums: list[int], target: int) -> int:
+        left, right = 0, len(nums)-1
+
+        while left <= right:
+            mid = (right+left) // 2
+
+            if nums[mid] == target:
+                return mid
+            if nums[mid] > target:
+                right = mid-1
+            else:
+                left = mid+1
+
+        return -1
+'''
+'''
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        result = 0
+        for i in range(1,n+1):
+            min = sum([1] * i)
+            max = sum([2] * i)
+            if max >= n >= min:
+                if min == n or max == n or i == n:
+                    result += 1
+                else:
+                    result += i
+
+        return result
+
+test = Solution()
+print(test.climbStairs(6))
+
+
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        roman_integer = {'I': 1, 'V': 5, 'X': 10,
+                         'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        result = 0
+
+        for char in range(len(s)): # 0 ~ n
+            if char != 0:
+                if s[char] == 'V' or s[char] == 'X':
+                    if s[char-1] == 'I':
+                        result += roman_integer[s[char]]-2
+                        continue
+
+                if s[char] == 'L' or s[char] == 'C':
+                    if s[char-1] == 'X':
+                        result += roman_integer[s[char]]-20
+                        continue
+
+                if s[char] == 'D' or s[char] == 'M':
+                    if s[char-1] == 'C':
+                        result += roman_integer[s[char]]-200
+                        continue
+
+            result += roman_integer[s[char]]
+
+        return result
+
+
+test = Solution()
+print(test.romanToInt('MCMXCIV'))
+
+# replace 활용 코드
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        roman_to_integer = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000,
+        }
+        s = s.replace("IV", "IIII").replace("IX", "VIIII").replace("XL", "XXXX").replace(
+            "XC", "LXXXX").replace("CD", "CCCC").replace("CM", "DCCCC")
+        return sum(map(lambda x: roman_to_integer[x], s))
+
+# 2개씩 끊어 계산, 해쉬 테이블 또한 가능한 수를 모두 만듦
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        roman_num = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000,
+            'IV': 4,
+            'IX': 9,
+            'XL': 40,
+            'XC': 90,
+            'CD': 400,
+            'CM': 900
+        }
+        sum = 0
+        i = 0
+
+        while i < len(s):
+            if i + 1 < len(s) and s[i:i+2] in roman_num:
+                sum += roman_num[s[i:i+2]]
+                i += 2
+            else:
+                sum += roman_num[s[i]]
+                i += 1
+
+        return sum
+'''
+'''
+x = int(input())
+
+d = [0] * (x+1)
+
+for i in range(2, x + 1):
+    # 이전 값으로부터 1을 더한 값
+    # 문제에선 d에 해당됨.
+    d[i] = d[i-1] + 1
+
+    if i % 2 == 0:
+        # 이전 값으로부터 1을 더한 값과 나누기 2를 한 값을 비교
+        # 여기서 나누기 2를 한 값에 더해주는 1은 '현재 수를 2로 한번 나누는 행동'에 대하여 더한 것을 의미함.
+        # 결론인 즉, x에서 1을 더해준 값 vs x에서 2로 나눈 값을 비교하여
+        # 1에서 시작하여 현재값을 만들 수 있는 최소 연산을 dp table에 저장하는 것으로 진행됨.
+        # 그리고 바텀업 방식을 사용하였기 때문에 반복이 지속되며 저장하였던 DP table에 있는 값을 계속 불러들여 사용함.
+        # 문제에선 c에 해당됨.
+        d[i] = min(d[i], d[i//2] + 1)
+
+    if i % 3 == 0:
+        # 마찬가지로 이전 값으로부터 1을 더한 값과 나누기 3을 한 값을 비교.
+        # 문제에선 b에 해당됨.
+        d[i] = min(d[i], d[i//3] + 1)
+    
+    if i % 5 == 0:
+        # 마찬가지로 이전 값으로부터 1 더한 값과 나누기 5를 한 값을 비교.
+        # 문제에선 a에 해당됨.
+        d[i] = min(d[i], d[i//5] + 1)
+    # 이러한 방식으로 풀이 시 예를 들어 x = 6일 때, 1에서부터 6을 만들 수 있는 최소 연산을 구하는 것이지만
+    # 동시에 6에서 1을 만들 수 있는 최소 연산을 구하는 것과 동일하게 됨.
+    # 1 -> x 로 통하는 가장 빠른 길의 경로를 저장하는 것과 동일함.
+
+print(d[x], d[:x+1])
+'''
+
+# - 처음부터 계산하면 된다. (식량이 제일 많은 창고부터 털어나갈 필요가 없음.)
+# - 0번부터 계산하여 짝수 인덱스, 1번부터 계산하여 홀수 인덱스의 창고를 모두 두 개의 변수에 담는다.
+# -> 잘못된 가설. 반례 7 1 1 8 1의 경우 7+8을 더한 15가 가장 큼.
+
+# 0 + 2, 0 + 3, 0 + 2 4, 0 + 4
+# dp_table = [15, 1, 8, 15, 9]
+# 방문을 했는 지 어떻게 알 수 있을까?
+
+# 현재 인덱스 위치를 저장하는 변수 index
+# 현재 값을 저장하는 dp_table
+# 1. index+1 < current_index 일 때만 비교.
+# 2. 
+
+# 이전 최대값의 인덱스와 값을 가지고 있는 배열를 만든다. (ex. [0,7])
+# 인접한 인덱스인 경우 더하지 않는다.
+# 
+'''
+n = int(input())
+
+array = list(map(int, input().split()))
+
+d = [0] * 100
+
+d[0] = array[0]
+d[1] = max(array[0], array[1])
+for i in range(2, n):
+    print(d[:n+1])
+    d[i] = max(d[i - 1], d[i - 2] + array[i])
+    print(d[:n+1])
+print(d[n-1])
+# 현재 배열 공간 + 2칸 전의 배열 공간의 값보다 이전 배열 공간의 값이 더 크다면 현재 공간도 그 값을 넣겠다.
+
+'''
+'''
+for _ in range(int(input())):
+    n, m = map(int,input().split())
+    mine = list(map(int,input().split()))
+    
+    for i in range(m):
+        max = 0
+        idx = []
+        for j in range(n):
+            if max < mine[j][i]:
+                max = mine[j][i]
+                idx = [j, i]
+        if 0 <= idx[0]-1 < n and 0 <= idx[1]+1 < n:
+            mine[idx[0-1]][idx[1+1]] += max
+        if 0 <= idx[1]+1 < n:
+            mine[idx[0]][idx[1+1]] += max
+        if 0 <= idx[0]+1 < n and 0 <= idx[1]+1 < n:
+            mine[idx[0+1]][idx[1+1]] += max
+    print(mine)    
+'''
+
+# 금광 문제
+'''
+for _ in range(int(input())):
+    n, m = map(int,input().split())
+    gold_mine = list(map(int,input().split()))
+    dp_table = []
+
+    for i in range(n):
+        dp_table.append(gold_mine[i*m:(i+1)*m])
+    
+    max = 0
+    idx = (0, 0)
+
+    for i in range(m):
+        for j in range(n):
+            if max < dp_table[j][i]:
+                max = dp_table[j][i]
+                idx = (j, i)
+        
+        if i+1 == m:
+            break
+
+        if 0 <= idx[0]-1 < n and 0 <= idx[1]+1 < m:
+            dp_table[idx[0]-1][idx[1]+1] += max
+
+        if 0 <= idx[1]+1 < m:
+            dp_table[idx[0]][idx[1]+1] += max
+        
+        if 0 <= idx[0]+1 < n and 0 <= idx[1]+1 < m:
+            dp_table[idx[0]+1][idx[1]+1] += max
+
+print(max)
+'''
+
+
+
+# 병사 배치하기 문제
+# LIS를 통한 문제풀이
+# LIS 설명 : https://cocoon1787.tistory.com/713
+
+n = int(input())
+array = list(map(int, input().split()))
+array.reverse()
+
+dp = [1] * n
+
+for i in range(1, n):
+    for j in range(0, i):
+        if array[j] < array[i]:
+            dp[i] = max(dp[i], dp[j]+1)
+
+print(dp)
+print(n - max(dp))

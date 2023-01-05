@@ -588,3 +588,74 @@ checked_list = len(input_nodes) * [0]
 print(bfs(start_node, input_nodes, checked_list[:]))
 print(dfs(start_node, input_nodes, checked_list[:]))
 '''
+'''
+from collections import deque
+class Solution:
+    def floodFill(self, image: list[list[int]], sr: int, sc: int, color: int) -> list[list[int]]:
+        queue = deque()
+        queue.append([sr,sc])
+        direction = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+        limited_x, limited_y = len(image[0]), len(image)
+        visited = [[True]*limited_x]*limited_y
+
+        while queue:
+            y, x = queue.popleft()
+
+            for i in range(4):
+                move_y = y + direction[i][0]
+                move_x = x + direction[i][1]                
+                if limited_x > move_x >= 0 and limited_y > move_y >= 0:
+                    if image[move_y][move_x] == image[y][x] and visited[move_y][move_x]:
+                        queue.append([move_y, move_x])
+                        
+            visited[y][x] = False
+            image[y][x] = color
+
+        return image
+
+test = Solution()
+print(test.floodFill([[1,1,1],[1,1,0],[1,0,1]],1,1,2))
+'''
+
+'''
+class Solution:
+    def twoPointer(self, arr:list[int], target:int) -> int:
+        length = len(arr)-1
+        left, right = 0, 0
+        result = []
+
+        while left != length:
+            if left == 0 and right ==0:
+                right += 1
+            if sum(arr[left:right]) >= target:
+                result.append(arr[left:right])
+                left += 1
+            if sum(arr[left:right]) < target:
+                if right == length:
+                    left += 1
+                else:
+                    right += 1
+        
+        return result
+
+test = Solution()
+print(test.twoPointer([1,2,3,4,5,6,5,4,3,2,1],9))
+'''
+
+def isBadVersion(bad):
+    if bad == 4:
+        return False
+    return True
+
+class Solution:
+    def firstBadVersion(self, n, s=1):
+        while s < n:
+            i = (n + s) // 2
+            if isBadVersion(i):
+                n = i
+            else:
+                s = i + 1
+        return s
+
+test = Solution()
+print(test.firstBadVersion(5))

@@ -13,10 +13,25 @@
 n = int(input())
 arr = [int(input()) for _ in range(n)]
 arr.reverse()
-dp_table = arr[0] + [0]*(n-1)
+dp_table = [1] * n
 
-for order in range(1, n):
-    if arr[order] == arr[order-1]:
-        dp_table[order] += arr[order-1]
-        continue
+for order in range(n):
+    if order >= n-1:
+        if dp_table[order] != 2:
+            arr[-1] += arr[order]
+        break
+
+    if dp_table[order] == 1:
+        if arr[order] + arr[order+1] >= arr[order] + arr[order+2]:
+            arr[order+1] += arr[order]
+            dp_table[order+1] = 2
+            dp_table[order+2] = 0
+        else:
+            arr[order+2] += arr[order]
+            dp_table[order+1] = 0
     
+    if dp_table[order] == 2:
+        arr[order+2] += arr[order]
+        dp_table[order+2] = 1
+
+print(arr)
